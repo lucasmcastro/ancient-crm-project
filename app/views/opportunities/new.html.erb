@@ -1,0 +1,55 @@
+<% content_for :javascript do %>
+  <script type="text/javascript">
+  	function clearforms() 
+	{
+		$("product_name").clear();
+		$("product_description").clear();
+		$('add_product').hide();
+		$('add_link').show();
+	}
+  </script>
+<% end %>
+
+<h1>Nova Oportunidade para <%= @account.name %></h1>
+
+<p id="add_link"><%= link_to_function("Adicionar Produto", "$('add_link').hide(); $('add_product').show()")%></p>
+
+<div id="add_product" style="display:none;">
+  <h3>Adicionar Produto</h3>
+  <% form_remote_for Product.new, :update => "opportunity_product_id", :position => :bottom, :html => {:id => 'product_form'}, :complete => "clearforms()" do |pform| %>
+    <p>Name</p> <%= pform.text_field :name %>
+    <p>Descrption</p> <%= pform.text_field :description %>
+    <p><%= pform.submit 'Add' %></p>
+<p><%= link_to_function("Cancelar", "$('add_product').hide(); $('add_link').show()")%></p>
+
+<% end %>
+</div>
+
+
+<% form_for([:account,@opportunity]) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :gerente %><br />
+	<%= select :opportunity, :manager_id, User.find(:all).collect{|u| [u.login, u.id] } %>
+  </p>
+
+  <p>
+    <%= f.label :produto %><br />
+	<%= select :opportunity, :product_id, Product.find(:all).collect{|p| [p.name, p.id] } %>
+  </p>
+
+  <p>
+    <%= f.label :status %><br />
+	<%= select :opportunity, :opportunity_status_id, OpportunityStatus.find(:all).collect{|o| [o.name, o.id] } %>
+  </p>
+  <p>
+    <%= f.label :valor %><br />
+    <%= f.text_field :value %>
+  </p>
+  <p>
+    <%= f.submit 'Salvar' %>
+  </p>
+<% end %>
+
+<%= link_to 'Voltar', account_path(@account) %>

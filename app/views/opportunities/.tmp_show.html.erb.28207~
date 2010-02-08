@@ -1,0 +1,33 @@
+<table id="mytable" cellspacing="0" summary="Detalhes da oportunidade <%=h @opportunity.product.name %>">
+<caption>Criada em <%= @opportunity.created_at %> por <%=h @opportunity.creator %></caption>
+<tr>
+  <th scope="col" abbr="Produto"><%=h @opportunity.product %></th>
+  <th scope="col" abbr="Opções">
+	    <%= link_to 'Detalhes', account_opportunity_path(@account, @opportunity) %> | 
+  	    <%= link_to 'Alterar', edit_account_opportunity_path(@account, @opportunity) %> | 
+	    <%= link_to 'Remover', account_opportunity_path(@account,@opportunity), :confirm => 'Tem Certeza?', :method => :delete %>
+  </th>
+</tr>
+<tr>
+  <th scope="row" class="specalt" abbr="Valor">Valor: R$ <%=h @opportunity.value %></th>
+  <td>Atualmente em: <%=h @opportunity.opportunity_status %></td>
+</tr>
+<tr>
+	<td>  	
+    </td>
+    <td>Gerenciada por: <%=h @opportunity.manager %></td>
+</tr>
+</table>
+
+<%= link_to 'Voltar para conta', account_path(@account) %>
+<%= link_to 'Nova Interação Comercial', new_account_opportunity_interaction_path(@account, @opportunity)%>
+
+<h3> Interações Comerciais </h3>
+
+<% @interactions.each do |interaction| %>
+<p>Relator: <%=h interaction.creator %></p>
+<p>Tipo: <%=h interaction.type.name %></p>
+<p>Assunto: <%=h interaction.title %></p>
+<p>Conteúdo: <%=h interaction.subject %></p>
+
+<% end %>

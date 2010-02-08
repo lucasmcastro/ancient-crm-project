@@ -1,0 +1,13 @@
+<p>
+  <b>Creator:</b>
+  <%=h @issue_status.creator %>
+</p>
+
+<p>
+  <b>Name:</b>
+  <%=h @issue_status.name %>
+</p>
+
+
+<%= link_to 'Edit', edit_issue_status_path(@issue_status) %> |
+<%= link_to 'Back', issue_statuses_path %>

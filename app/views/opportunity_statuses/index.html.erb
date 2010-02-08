@@ -1,0 +1,24 @@
+<h1>Listing opportunity_statuses</h1>
+
+<table>
+  <tr>
+    <th>Creator</th>
+    <th>Name</th>
+    <th>Order</th>
+  </tr>
+
+<% @opportunity_statuses.each do |opportunity_status| %>
+  <tr>
+    <td><%=h opportunity_status.creator %></td>
+    <td><%=h opportunity_status.name %></td>
+    <td><%=h opportunity_status.order %></td>
+    <td><%= link_to 'Show', opportunity_status %></td>
+    <td><%= link_to 'Edit', edit_opportunity_status_path(opportunity_status) %></td>
+    <td><%= link_to 'Destroy', opportunity_status, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New opportunity_status', new_opportunity_status_path %>

@@ -1,0 +1,15 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  manager: 
+  creator: 
+  product: 
+  opportunity_status: 
+  value: 1.5
+
+two:
+  manager: 
+  creator: 
+  product: 
+  opportunity_status: 
+  value: 1.5

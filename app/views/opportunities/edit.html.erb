@@ -1,0 +1,27 @@
+<h1>Editing opportunity</h1>
+
+<% form_for([:account,@opportunity], :url => {:method => 'PUT', :action => "update"}) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :gerente %><br />
+	<%= select :opportunity, :manager_id, User.find(:all).collect{|u| [u.login, u.id] } %>
+  </p>
+  <p>
+    <%= f.label :produto %><br />
+	<%= select :opportunity, :product_id, Product.find(:all).collect{|p| [p.name, p.id] } %>
+  </p>
+  <p>
+    <%= f.label :status %><br />
+	<%= select :opportunity, :opportunity_status_id, OpportunityStatus.find(:all).collect{|o| [o.name, o.id] } %>
+  </p>
+  <p>
+    <%= f.label :valor %><br />
+    <%= f.text_field :value %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Back', account_path(@account) %>

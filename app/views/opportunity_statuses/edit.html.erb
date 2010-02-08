@@ -1,0 +1,24 @@
+<h1>Editing opportunity_status</h1>
+
+<% form_for(@opportunity_status) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :creator %><br />
+    <%= f.text_field :creator %>
+  </p>
+  <p>
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.label :order %><br />
+    <%= f.text_field :order %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @opportunity_status %> |
+<%= link_to 'Back', opportunity_statuses_path %>

@@ -1,0 +1,21 @@
+<h1>Minhas Contas</h1>
+
+<table>
+  <tr>
+    <th>Nome</th>
+  </tr>
+
+<% @accounts.each do |account| %>
+  <tr>
+    <td><%=h account.name %></td>
+    <td><%= link_to 'Nova Oportunidade', new_account_opportunity_path(account) %></td>	
+    <td><%= link_to 'Detalhes', account %></td>
+    <td><%= link_to 'Alterar', edit_account_path(account) %></td>
+    <td><%= link_to 'Remover', account, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'Nova Conta', new_account_path %>

@@ -1,0 +1,47 @@
+<% content_for :javascript do %>
+  <script type="text/javascript">
+  	function clearforms() 
+	{
+		$("interaction_type_name").clear();
+		$('add_interaction_type').hide();
+		$('add_link').show();
+	}
+  </script>
+<% end %>
+
+<h1>Nova Interação Comercial</h1>
+
+<p id="add_link"><%= link_to_function("Adicionar Tipo de Interação", "$('add_link').hide(); $('add_interaction_type').show()")%></p>
+
+<div id="add_interaction_type" style="display:none;">
+  <h3>Adicionar Tipo de Interação</h3>
+  <% form_remote_for InteractionType.new, :update => "interaction_type_id", :position => :bottom, :html => {:id => 'interaction_type_form'}, :complete => "clearforms()" do |itform| %>
+    <p>Nome</p> <%= itform.text_field :name %>
+    <p><%= itform.submit 'Salvar' %></p>
+<p><%= link_to_function("Cancelar", "$('add_product').hide(); $('add_link').show()")%></p>
+
+<% end %>
+</div>
+
+
+<% form_for([:account, :opportunity, @interaction]) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :tipo %><br />
+  	<%= select :interaction, :type_id, InteractionType.find(:all).collect { |it| [it.name, it.id] }%>
+  </p>
+  <p>
+    <%= f.label :assunto %><br />
+    <%= f.text_field :title %>
+  </p>
+  <p>
+    <%= f.label :conteúdo %><br />
+    <%= f.text_area :content %>
+  </p>
+  <p>
+    <%= f.submit 'Salvar' %>
+  </p>
+<% end %>
+
+<%= link_to 'Voltar para oportunidade', account_opportunity_path(@account, @opportunity) %>

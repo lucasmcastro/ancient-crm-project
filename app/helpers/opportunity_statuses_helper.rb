@@ -1,0 +1,2 @@
+module OpportunityStatusesHelper
+end

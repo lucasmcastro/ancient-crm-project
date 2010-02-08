@@ -1,0 +1,18 @@
+<p>
+  <b>Creator:</b>
+  <%=h @opportunity_status.creator %>
+</p>
+
+<p>
+  <b>Name:</b>
+  <%=h @opportunity_status.name %>
+</p>
+
+<p>
+  <b>Order:</b>
+  <%=h @opportunity_status.order %>
+</p>
+
+
+<%= link_to 'Edit', edit_opportunity_status_path(@opportunity_status) %> |
+<%= link_to 'Back', opportunity_statuses_path %>

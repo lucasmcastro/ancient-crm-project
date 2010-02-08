@@ -1,0 +1,28 @@
+<p>
+  <b>Creator:</b>
+  <%=h @issue.creator %>
+</p>
+
+<p>
+  <b>Opportunity:</b>
+  <%=h @issue.opportunity %>
+</p>
+
+<p>
+  <b>Status:</b>
+  <%=h @issue.status %>
+</p>
+
+<p>
+  <b>Subject:</b>
+  <%=h @issue.subject %>
+</p>
+
+<p>
+  <b>Content:</b>
+  <%=h @issue.content %>
+</p>
+
+
+<%= link_to 'Edit', edit_issue_path(@issue) %> |
+<%= link_to 'Back', issues_path %>
