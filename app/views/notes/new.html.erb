@@ -1,0 +1,19 @@
+<h1>New note</h1>
+
+<% form_for([@commentable, @note]) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :subject %><br />
+    <%= f.text_field :subject %>
+  </p>
+  <p>
+    <%= f.label :content %><br />
+    <%= f.text_area :content %>
+  </p>
+  <p>
+    <%= f.submit 'Adicionar' %>
+  </p>
+<% end %>
+
+<%= link_to 'Voltar', @commentable %>

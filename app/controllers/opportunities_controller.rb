@@ -14,9 +14,10 @@ class OpportunitiesController < ApplicationController
   # GET /opportunities/1
   # GET /opportunities/1.xml
   def show
-    @account = Account.find(params[:account_id])
     @opportunity = Opportunity.find(params[:id])
+    @account = @opportunity.account
     @interactions = @opportunity.interactions
+    @issues = @opportunity.issues
     
     respond_to do |format|
       format.html # show.html.erb
@@ -38,8 +39,8 @@ class OpportunitiesController < ApplicationController
 
   # GET /opportunities/1/edit
   def edit
-    @account = Account.find(params[:account_id])
     @opportunity = Opportunity.find(params[:id])
+    @account = @opportunity.account
   end
 
   # POST /opportunities
@@ -65,8 +66,8 @@ class OpportunitiesController < ApplicationController
   # PUT /opportunities/1
   # PUT /opportunities/1.xml
   def update
-    @account = Account.find(params[:account_id])
     @opportunity = Opportunity.find(params[:id])
+    @account = @opportunity.account
 
     respond_to do |format|
       if @opportunity.update_attributes(params[:opportunity])
@@ -83,12 +84,12 @@ class OpportunitiesController < ApplicationController
   # DELETE /opportunities/1
   # DELETE /opportunities/1.xml
   def destroy
-    @account = Account.find(params[:account_id])
     @opportunity = Opportunity.find(params[:id])
+    @account = @opportunity.account
     @opportunity.destroy
 
     respond_to do |format|
-      format.html { redirect_to(opportunities_url) }
+      format.html { redirect_to @account }
       format.xml  { head :ok }
     end
   end

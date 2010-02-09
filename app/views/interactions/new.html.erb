@@ -24,7 +24,7 @@
 </div>
 
 
-<% form_for([:account, :opportunity, @interaction]) do |f| %>
+<% form_for([:opportunity, @interaction]) do |f| %>
   <%= f.error_messages %>
 
   <p>
@@ -44,4 +44,4 @@
   </p>
 <% end %>
 
-<%= link_to 'Voltar para oportunidade', account_opportunity_path(@account, @opportunity) %>
+<%= link_to 'Voltar para oportunidade', @opportunity %>

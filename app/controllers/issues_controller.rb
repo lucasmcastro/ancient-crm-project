@@ -14,6 +14,8 @@ class IssuesController < ApplicationController
   # GET /issues/1.xml
   def show
     @issue = Issue.find(params[:id])
+    @opportunity = @issue.opportunity
+    @notes = @issue.notes
 
     respond_to do |format|
       format.html # show.html.erb
@@ -24,6 +26,7 @@ class IssuesController < ApplicationController
   # GET /issues/new
   # GET /issues/new.xml
   def new
+    @opportunity = Opportunity.find(params[:opportunity_id])
     @issue = Issue.new
 
     respond_to do |format|
@@ -35,17 +38,22 @@ class IssuesController < ApplicationController
   # GET /issues/1/edit
   def edit
     @issue = Issue.find(params[:id])
+    @opportunity = @issue.opportunity
   end
 
   # POST /issues
   # POST /issues.xml
   def create
+    @opportunity = Opportunity.find(params[:opportunity_id])
     @issue = Issue.new(params[:issue])
+    @issue.creator = current_user
+    @issue.opportunity = @opportunity
+    
 
     respond_to do |format|
       if @issue.save
-        flash[:notice] = 'Issue was successfully created.'
-        format.html { redirect_to(@issue) }
+        flash[:notice] = 'Interação técnica foi adicionada com sucesso.'
+        format.html { redirect_to(@opportunity) }
         format.xml  { render :xml => @issue, :status => :created, :location => @issue }
       else
         format.html { render :action => "new" }
@@ -58,11 +66,12 @@ class IssuesController < ApplicationController
   # PUT /issues/1.xml
   def update
     @issue = Issue.find(params[:id])
+    @opportunity = @issue.opportunity
 
     respond_to do |format|
       if @issue.update_attributes(params[:issue])
-        flash[:notice] = 'Issue was successfully updated.'
-        format.html { redirect_to(@issue) }
+        flash[:notice] = 'Interação comercial alterada com sucesso.'
+        format.html { redirect_to(@opportunity) }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
@@ -75,6 +84,7 @@ class IssuesController < ApplicationController
   # DELETE /issues/1.xml
   def destroy
     @issue = Issue.find(params[:id])
+    @opportunity = @issue.opportunity
     @issue.destroy
 
     respond_to do |format|

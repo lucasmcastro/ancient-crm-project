@@ -1,0 +1,8 @@
+  <tr>
+    <td><%=h note.created_at.strftime("%D as %H:%M") %></td>
+    <td><%=h note.creator %></td>
+    <td><%=h note.subject %></td>
+    <td><%=h note.content %></td>
+    <td><%= link_to 'Alterar', edit_note_path(note) %></td>
+    <td><%= link_to 'Remover', note, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>

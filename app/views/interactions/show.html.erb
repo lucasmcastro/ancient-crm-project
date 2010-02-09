@@ -1,28 +1,34 @@
-<p>
-  <b>Creator:</b>
-  <%=h @interaction.creator %>
-</p>
+<h2>Interação Técnica</h2>
 
-<p>
-  <b>Opportunity:</b>
-  <%=h @interaction.opportunity %>
-</p>
+<table>
+  <tr>
+    <th>Relator</th>
+    <th>Tipo</th>
+    <th>Assunto</th>
+  </tr>
 
-<p>
-  <b>Type:</b>
-  <%=h @interaction.type %>
-</p>
+  <tr>
+    <td><%=h @interaction.creator %></td>
+    <td><%=h @interaction.type %></td>
+    <td><%=h @interaction.subject %></td>
+    <td><%= link_to 'Detalhes', @interaction %></td>
+    <td><%= link_to 'Alterar', edit_interaction_path(@interaction) %></td>
+    <td><%= link_to 'Remover', @interaction, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+</table>
 
-<p>
-  <b>Subject:</b>
-  <%=h @interaction.subject %>
-</p>
+<%= link_to 'Voltar para oportunidade', @opportunity %> <%= link_to 'adicionar nota', new_interaction_note_url(@opportunity) %>
 
-<p>
-  <b>Content:</b>
-  <%=h @interaction.content %>
-</p>
+<h2>Notas associadas</h2>
+<table>
+  <tr>
+    <th>Data</th>
+    <th>Relator</th>
+    <th>Título</th>
+    <th>Conteúdo</th>
+  </tr>
 
-
-<%= link_to 'Edit', edit_interaction_path(@interaction) %> |
-<%= link_to 'Back', interactions_path %>
+<% @notes.each do |note| %>
+  <%= render :partial => 'notes/index', :locals => {:note => note, :notes => @notes} %>
+<% end %>
+</table>

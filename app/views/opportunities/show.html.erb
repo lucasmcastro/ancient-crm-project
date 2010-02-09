@@ -3,9 +3,9 @@
 <tr>
   <th scope="col" abbr="Produto"><%=h @opportunity.product %></th>
   <th scope="col" abbr="Opções">
-	    <%= link_to 'Detalhes', account_opportunity_path(@account, @opportunity) %> | 
-  	    <%= link_to 'Alterar', edit_account_opportunity_path(@account, @opportunity) %> | 
-	    <%= link_to 'Remover', account_opportunity_path(@account,@opportunity), :confirm => 'Tem Certeza?', :method => :delete %>
+	    <%= link_to 'Detalhes', @opportunity %> | 
+  	    <%= link_to 'Alterar', edit_opportunity_path(@opportunity) %> | 
+	    <%= link_to 'Remover', @opportunity, :confirm => 'Tem Certeza?', :method => :delete %>
   </th>
 </tr>
 <tr>
@@ -19,8 +19,9 @@
 </tr>
 </table>
 
-<%= link_to 'Voltar para conta', account_path(@account) %>
-<%= link_to 'Nova Interação Comercial', new_account_opportunity_interaction_path(@account, @opportunity)%>
+<%= link_to 'Voltar para conta', @account %>
+<%= link_to 'Nova Interação Comercial', new_opportunity_interaction_path(@opportunity)%>
+<%= link_to 'Nova Interação Técnica', new_opportunity_issue_path(@opportunity)%>
 
 <h3> Interações Comerciais </h3>
 
@@ -36,9 +37,32 @@
     <td><%=h interaction.creator %></td>
     <td><%=h interaction.type %></td>
     <td><%=h interaction.subject %></td>
-    <td><%= link_to 'Detalhes', account_opportunity_interaction_path(@account, @opportunity, interaction) %></td>
-    <td><%= link_to 'Alterar', edit_account_opportunity_interaction_path(@account, @opportunity, interaction) %></td>
-    <td><%= link_to 'Remover', account_opportunity_interaction_path(@account, @opportunity, interaction), :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= link_to 'Detalhes', interaction %></td>
+    <td><%= link_to 'Alterar', edit_interaction_path(interaction) %></td>
+    <td><%= link_to 'Remover', interaction, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<h3> Interações Técnicas </h3>
+
+<table>
+  <tr>
+    <th>Data</th>
+    <th>Relator</th>
+    <th>Status</th>
+    <th>Assunto</th>
+  </tr>
+
+<% @issues.each do |issue| %>
+  <tr>  	
+    <td><%=h issue.created_at.strftime("%D as %H:%M") %></td>
+    <td><%=h issue.creator %></td>
+    <td><%=h issue.status %></td>
+    <td><%=h issue.subject %></td>
+    <td><%= link_to 'Detalhes', issue %></td>
+    <td><%= link_to 'Alterar', edit_issue_path(issue) %></td>
+    <td><%= link_to 'Remover', issue, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 <% end %>
 </table>

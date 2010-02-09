@@ -7,6 +7,7 @@ class Opportunity < ActiveRecord::Base
   belongs_to :opportunity_status
   
   has_many :interactions
+  has_many :issues
   
   # Atributos acessíveis para "mass-assignment"
   attr_accessible :value, :manager_id, :product_id, :opportunity_status_id, :account

@@ -4,16 +4,8 @@
   <%= f.error_messages %>
 
   <p>
-    <%= f.label :creator %><br />
-    <%= f.text_field :creator %>
-  </p>
-  <p>
-    <%= f.label :opportunity %><br />
-    <%= f.text_field :opportunity %>
-  </p>
-  <p>
     <%= f.label :status %><br />
-    <%= f.text_field :status %>
+    <%= select :issue, :status_id, IssueStatus.find(:all).collect{|i| [i.name, i.id]} %>
   </p>
   <p>
     <%= f.label :subject %><br />

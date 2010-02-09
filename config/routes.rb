@@ -6,7 +6,9 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :interaction_types
 
-  map.resources :issues
+  map.resources :issues do |issues|
+    issues.resources :notes
+  end
 
   map.resources :products
 
@@ -15,12 +17,17 @@ ActionController::Routing::Routes.draw do |map|
   map.resource :session
   
   # Rotas aninhadas
-  map.resources :accounts do |accounts|
+  map.resources :accounts, :shallow => true do |accounts|
     accounts.resources :opportunities do |opportunities|
-      opportunities.resources :interactions
+      opportunities.resources :interactions do |interactions|
+        interactions.resources  :notes
+      end
+      opportunities.resources :issues do |issues|
+        issues.resources :notes
+      end
     end
   end
-
+  
   # Rotas manuais
   map.logout '/logout', :controller => 'sessions', :action => 'destroy'
   map.login '/login', :controller => 'sessions', :action => 'new'

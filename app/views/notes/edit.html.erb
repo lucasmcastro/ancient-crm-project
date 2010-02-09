@@ -1,6 +1,6 @@
-<h1>New interaction</h1>
+<h1>Editing note</h1>
 
-<% form_for(@interaction) do |f| %>
+<% form_for(@note) do |f| %>
   <%= f.error_messages %>
 
   <p>
@@ -8,12 +8,8 @@
     <%= f.text_field :creator %>
   </p>
   <p>
-    <%= f.label :opportunity %><br />
-    <%= f.text_field :opportunity %>
-  </p>
-  <p>
-    <%= f.label :type %><br />
-    <%= f.text_field :type %>
+    <%= f.label :commentable %><br />
+    <%= f.text_field :commentable %>
   </p>
   <p>
     <%= f.label :subject %><br />
@@ -24,8 +20,9 @@
     <%= f.text_area :content %>
   </p>
   <p>
-    <%= f.submit 'Create' %>
+    <%= f.submit 'Update' %>
   </p>
 <% end %>
 
-<%= link_to 'Back', interactions_path %>
+<%= link_to 'Show', @note %> |
+<%= link_to 'Back', notes_path %>

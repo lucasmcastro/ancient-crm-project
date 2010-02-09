@@ -1,0 +1,23 @@
+<p>
+  <b>Creator:</b>
+  <%=h @note.creator %>
+</p>
+
+<p>
+  <b>Commentable:</b>
+  <%=h @note.commentable %>
+</p>
+
+<p>
+  <b>Subject:</b>
+  <%=h @note.subject %>
+</p>
+
+<p>
+  <b>Content:</b>
+  <%=h @note.content %>
+</p>
+
+
+<%= link_to 'Edit', edit_note_path(@note) %> |
+<%= link_to 'Back', notes_path %>

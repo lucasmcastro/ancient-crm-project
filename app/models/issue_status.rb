@@ -11,4 +11,9 @@ class IssueStatus < ActiveRecord::Base
   
   # Verificar integridade dos objetos associados
   validates_associated :creator
+  
+  # Definições
+  def to_s
+    self.name
+  end
 end

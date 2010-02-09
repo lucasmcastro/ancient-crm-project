@@ -3,6 +3,8 @@ class Interaction < ActiveRecord::Base
   belongs_to :creator, :class_name => 'User'
   belongs_to :type, :class_name => 'InteractionType'
   belongs_to :opportunity
+
+  has_many :notes, :as => :commentable
   
   # Atributos acessíveis para 'mass-assignment'
   attr_accessible :type_id, :subject, :content

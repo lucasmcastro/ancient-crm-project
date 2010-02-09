@@ -1,28 +1,39 @@
-<p>
-  <b>Creator:</b>
-  <%=h @issue.creator %>
-</p>
+<h2> Interações Técnicas </h2>
 
-<p>
-  <b>Opportunity:</b>
-  <%=h @issue.opportunity %>
-</p>
+<table>
+  <tr>
+    <th>Data</th>
+    <th>Relator</th>
+    <th>Status</th>
+    <th>Assunto</th>
+	<th>Conteúdo</th>
+  </tr>
 
-<p>
-  <b>Status:</b>
-  <%=h @issue.status %>
-</p>
+  <tr>  	
+    <td><%=h @issue.created_at.strftime("%D as %H:%M") %></td>
+    <td><%=h @issue.creator %></td>
+    <td><%=h @issue.status %></td>
+    <td><%=h @issue.subject %></td>
+    <td><%=h @issue.content %></td>
+    <td><%= link_to 'Detalhes', @issue %></td>
+    <td><%= link_to 'Alterar', edit_issue_path(@issue) %></td>
+    <td><%= link_to 'Remover', @issue, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+</table>
 
-<p>
-  <b>Subject:</b>
-  <%=h @issue.subject %>
-</p>
+<%= link_to "voltar para oportunidade", @opportunity%>
+<%= link_to "adicionar nota", new_issue_note_path(@issue) %>
 
-<p>
-  <b>Content:</b>
-  <%=h @issue.content %>
-</p>
+<h2>Notas associadas</h2>
+<table>
+  <tr>
+    <th>Data</th>
+    <th>Relator</th>
+    <th>Título</th>
+    <th>Conteúdo</th>
+  </tr>
 
-
-<%= link_to 'Edit', edit_issue_path(@issue) %> |
-<%= link_to 'Back', issues_path %>
+<% @notes.each do |note| %>
+  <%= render :partial => 'notes/index', :locals => {:note => note, :notes => @notes} %>
+<% end %>
+</table>
