@@ -50,18 +50,20 @@
 
 <table>
   <tr>
-    <th>Data</th>
-    <th>Relator</th>
-    <th>Status</th>
     <th>Assunto</th>
+    <th>Status</th>
+    <th>Relator</th>
+    <th>Notas</th>
+    <th>Data</th>
   </tr>
 
 <% @issues.each do |issue| %>
   <tr>  	
-    <td><%=h issue.created_at.strftime("%D as %H:%M") %></td>
-    <td><%=h issue.creator %></td>
-    <td><%=h issue.status %></td>
     <td><%=h issue.subject %></td>
+    <td><%=h issue.status %></td>
+    <td><%=h issue.creator %></td>
+    <td><%=h issue.notes.count %></td>
+    <td><%=h issue.created_at.strftime("%D as %H:%M") %></td>
     <td><%= link_to 'Detalhes', issue %></td>
     <td><%= link_to 'Alterar', edit_issue_path(issue) %></td>
     <td><%= link_to 'Remover', issue, :confirm => 'Are you sure?', :method => :delete %></td>
