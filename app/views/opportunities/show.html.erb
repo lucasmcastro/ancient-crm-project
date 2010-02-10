@@ -27,16 +27,18 @@
 
 <table>
   <tr>
-    <th>Relator</th>
-    <th>Tipo</th>
     <th>Assunto</th>
+    <th>Tipo</th>
+    <th>Relator</th>
+	<th>Notas</th>
   </tr>
 
 <% @interactions.each do |interaction| %>
   <tr>
-    <td><%=h interaction.creator %></td>
-    <td><%=h interaction.type %></td>
     <td><%=h interaction.subject %></td>
+    <td><%=h interaction.type %></td>
+    <td><%=h interaction.creator %></td>
+    <td><%=h interaction.notes.count %></td>
     <td><%= link_to 'Detalhes', interaction %></td>
     <td><%= link_to 'Alterar', edit_interaction_path(interaction) %></td>
     <td><%= link_to 'Remover', interaction, :confirm => 'Are you sure?', :method => :delete %></td>
