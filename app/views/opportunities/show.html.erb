@@ -53,6 +53,7 @@
     <th>Assunto</th>
     <th>Status</th>
     <th>Relator</th>
+    <th>Responsável</th>	
     <th>Notas</th>
     <th>Data</th>
   </tr>
@@ -62,6 +63,7 @@
     <td><%=h issue.subject %></td>
     <td><%=h issue.status %></td>
     <td><%=h issue.creator %></td>
+    <td><%=h issue.responsible %></td>
     <td><%=h issue.notes.count %></td>
     <td><%=h issue.created_at.strftime("%D as %H:%M") %></td>
     <td><%= link_to 'Detalhes', issue %></td>

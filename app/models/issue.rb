@@ -1,13 +1,14 @@
 class Issue < ActiveRecord::Base
   # Relacionamentos
   belongs_to :creator, :class_name => 'User'
+  belongs_to :responsible, :class_name => 'User'
   belongs_to :status, :class_name => 'IssueStatus'
   belongs_to :opportunity
 
   has_many :notes, :as => :commentable
 
   # Atributos acessíveis para "mass-assignment"
-  attr_accessible :status_id, :subject, :content
+  attr_accessible :status_id, :subject, :content, :responsible_id
   
   # Atributos obrigatórios
   validates_presence_of :creator_id
