@@ -1,29 +1,29 @@
 ActionController::Routing::Routes.draw do |map|
   # Rotas simples
+
   map.resources :issue_statuses
 
   map.resources :opportunity_statuses
 
   map.resources :interaction_types
 
-  map.resources :issues do |issues|
-    issues.resources :notes
-  end
-
   map.resources :products
-
-  map.resources :users
 
   map.resource :session
   
   # Rotas aninhadas
+  map.resources :users, :shallow => true do |users|
+    users.resource :address
+  end
+  
   map.resources :accounts, :shallow => true do |accounts|
+    accounts.resource :address
     accounts.resources :opportunities do |opportunities|
       opportunities.resources :interactions do |interactions|
         interactions.resources  :notes
       end
       opportunities.resources :issues do |issues|
-        issues.resources :notes
+        issues.resources :notes, :only => ["new", "create"]
       end
     end
   end

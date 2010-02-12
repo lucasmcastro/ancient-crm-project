@@ -3,7 +3,13 @@
   <b>Gerente:</b>
   <%=h @account.manager.login %>
 </p>
-
+<% unless @account.address %>
+  <%= link_to "Cadastrar endereço", new_account_address_url(@account) %>
+<% else %>
+<h3> Endereço </h3>
+  <%=h @account.address %>
+  <%= link_to "Alterar endereço", edit_account_address_url(@account) %>
+<% end %>
 
 <h3>Oportunidades</h3>
 

@@ -1,0 +1,39 @@
+<h1>Novo Endereço</h1>
+
+<% form_for(@address, :url => address_polymorphic_path(@addressable)) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :CEP %><br />
+    <%= f.text_field :zip %>
+  </p>
+  <p>
+    <%= f.label :rua_1 %><br />
+    <%= f.text_field :street_1 %>
+  </p>
+  <p>
+    <%= f.label :rua_2 %><br />
+    <%= f.text_field :street_2 %>
+  </p>
+  <p>
+    <%= f.label :bairro %><br />
+    <%= f.text_field :city_area %>
+  </p>
+  <p>
+    <%= f.label :cidade %><br />
+    <%= f.text_field :city %>
+  </p>
+  <p>
+    <%= f.label :estado %><br />
+    <%= f.text_field :state %>
+  </p>
+  <p>
+    <%= f.label :país %><br />
+    <%= f.text_field :country %>
+  </p>
+  <p>
+    <%= f.submit 'Salvar' %>
+  </p>
+<% end %>
+
+<%= link_to 'Voltar', @addressable %>
