@@ -38,4 +38,9 @@ Rails::Initializer.run do |config|
   # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
   # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}')]
   # config.i18n.default_locale = :de
+  
+  # -- Plugins e Gems --
+  # Record Filter
+  #   Permite fazer queries de SQL através de uma DSL
+  config.gem 'aub-record_filter', :lib => 'record_filter', :source => 'http://gems.github.com'
 end
