@@ -4,7 +4,6 @@
   <tr>
     <th>Nome</th>	
     <th>Valor</th>
-	<th>Última Interação</th>	
     <th>Interações</th>
     <th>Problemas</th>	
   </tr>
@@ -13,7 +12,6 @@
   <tr>
     <td><%=h account.name %> ( <%= account.opportunities.count %> )</td>
     <td>R$ <%= account.opportunities.sum(:value) %></td>
-	<td><%= account.last_interaction.first.class %></td>
     <td><%= account.interactions_sum %></td>
     <td><%= account.open_issues_sum %>/<%= account.issues_sum %></td>
     <td><%= link_to 'Nova Oportunidade', new_account_opportunity_path(account) %></td>	
