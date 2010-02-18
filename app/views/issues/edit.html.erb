@@ -1,4 +1,4 @@
-<h1>Editing issue</h1>
+<h1>Atualizando Problema</h1>
 
 <% form_for(@issue) do |f| %>
   <%= f.error_messages %>
@@ -12,17 +12,16 @@
     <%= select :issue, :responsible_id, [["Nenhum",false]] + User.find(:all).collect{|u| [u.login, u.id] } %>
   </p>  
   <p>
-    <%= f.label :subject %><br />
+    <%= f.label :assunto %><br />
     <%= f.text_field :subject %>
   </p>
   <p>
-    <%= f.label :content %><br />
+    <%= f.label :conteúdo %><br />
     <%= f.text_area :content %>
   </p>
   <p>
-    <%= f.submit 'Update' %>
+    <%= f.submit 'Atualizar' %>
   </p>
 <% end %>
 
-<%= link_to 'Show', @issue %> |
-<%= link_to 'Back', issues_path %>
+<%= link_to 'Voltar para oportunidade', @opportunity %>
