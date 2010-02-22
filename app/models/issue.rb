@@ -1,4 +1,8 @@
 class Issue < ActiveRecord::Base
+  # Comportamentos
+  versioned
+  include VersionedHelpers
+  
   # Relacionamentos
   belongs_to :creator, :class_name => 'User'
   belongs_to :responsible, :class_name => 'User'
@@ -21,5 +25,11 @@ class Issue < ActiveRecord::Base
   validates_associated :creator
   validates_associated :status
   validates_associated :opportunity
+
+  # Definições
+  def important_attributes
+    ["responsible_id", "status_id"]
+  end
+  
 
 end

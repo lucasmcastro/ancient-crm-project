@@ -1,8 +1,20 @@
   <tr>
     <td><%=h note.created_at.strftime("%D as %H:%M") %></td>
     <td><%=h note.creator %></td>
+  	<td>
+	  <% if note.commentable_version and not note.commentable_version.zero? %>
+		<% note.commentable.important_changes(note.commentable_version).each do |k,v| %>
+	    <p><%= "#{k} changed from #{v[0]} to #{v[1]}" %></p>
+		<% end %>
+	  <% else %>
+		<p>-</p>
+	  <% end %>
+</ul>	
+	</td>
     <td><%=h note.subject %></td>
     <td><%=h note.content %></td>
     <td><%= link_to 'Alterar', edit_note_path(note) %></td>
     <td><%= link_to 'Remover', note, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
+
+

@@ -24,11 +24,7 @@ class NotesController < ApplicationController
   # GET /notes/new
   # GET /notes/new.xml
   def new
-    if params.has_key? :interaction_id
-      @commentable = Interaction.find(params[:interaction_id])
-    elsif params.has_key? :issue_id
-      @commentable = Issue.find(params[:issue_id])
-    end
+    @commentable = find_commentable(params)
     @note = Note.new
 
     respond_to do |format|
@@ -45,15 +41,15 @@ class NotesController < ApplicationController
   # POST /notes
   # POST /notes.xml
   def create
-    if params.has_key? :interaction_id
-      @commentable = Interaction.find(params[:interaction_id])
-    elsif params.has_key? :issue_id
-      @commentable = Issue.find(params[:issue_id])
-    end
+    @commentable = find_commentable(params)
     @note = Note.new(params[:note])
     @note.creator = current_user
     @note.commentable = @commentable
 
+    commentable_key = @commentable.class.class_name.downcase.to_sym
+    @commentable.update_attributes(params[commentable_key]) if params.has_key? commentable_key
+    @note.commentable_version = @commentable.version if (@note.valid? and @commentable.respond_to? :version)
+    
     respond_to do |format|
       if @note.save
         flash[:notice] = 'Note was successfully created.'
@@ -94,5 +90,13 @@ class NotesController < ApplicationController
       format.html { redirect_to(@commentable) }
       format.xml  { head :ok }
     end
+  end
+  
+  protected
+  
+  def find_commentable(params)
+    commentable = Interaction.find(params[:interaction_id]) if params.has_key? :interaction_id
+    commentable = Issue.find(params[:issue_id]) if params.has_key? :issue_id
+    commentable    
   end
 end

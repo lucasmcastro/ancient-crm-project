@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100211130549) do
+ActiveRecord::Schema.define(:version => 20100221154031) do
 
   create_table "accounts", :force => true do |t|
     t.integer  "manager_id"
@@ -76,6 +76,7 @@ ActiveRecord::Schema.define(:version => 20100211130549) do
     t.text     "content"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "commentable_version"
   end
 
   create_table "opportunities", :force => true do |t|
@@ -130,5 +131,17 @@ ActiveRecord::Schema.define(:version => 20100211130549) do
   end
 
   add_index "users", ["login"], :name => "index_users_on_login", :unique => true
+
+  create_table "versions", :force => true do |t|
+    t.integer  "versioned_id"
+    t.string   "versioned_type"
+    t.text     "changes"
+    t.integer  "number"
+    t.datetime "created_at"
+  end
+
+  add_index "versions", ["created_at"], :name => "index_versions_on_created_at"
+  add_index "versions", ["number"], :name => "index_versions_on_number"
+  add_index "versions", ["versioned_type", "versioned_id"], :name => "index_versions_on_versioned_type_and_versioned_id"
 
 end

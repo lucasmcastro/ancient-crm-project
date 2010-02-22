@@ -1,8 +1,7 @@
-<h2> Interações Técnicas </h2>
+<h2> Problema: <%=h @issue.subject %> </h2>
 
 <table>
   <tr>
-    <th>Assunto</th>
 	<th>Conteúdo</th>
     <th>Status</th>
     <th>Data</th>
@@ -11,26 +10,24 @@
   </tr>
 
   <tr>  	
-    <td><%=h @issue.subject %></td>
     <td><%=h @issue.content %></td>
     <td><%=h @issue.status %></td>
     <td><%=h @issue.created_at.strftime("%D as %H:%M") %></td>
     <td><%=h @issue.creator %></td>
     <td><%=h @issue.responsible %></td>	
-    <td><%= link_to 'Detalhes', @issue %></td>
-    <td><%= link_to 'Alterar', edit_issue_path(@issue) %></td>
+	<td><%= link_to_function("Atualizar", "$('add_note').show()") %></td>
     <td><%= link_to 'Remover', @issue, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 </table>
 
 <%= link_to "voltar para oportunidade", @opportunity%>
-<%= link_to "adicionar nota", new_issue_note_path(@issue) %>
 
 <h2>Notas associadas</h2>
 <table>
   <tr>
     <th>Data</th>
     <th>Relator</th>
+    <th>Mudanças</th>	
     <th>Título</th>
     <th>Conteúdo</th>
   </tr>
@@ -39,3 +36,33 @@
   <%= render :partial => 'notes/index', :locals => {:note => note, :notes => @notes} %>
 <% end %>
 </table>
+
+
+<div id="add_note" style="display:none">
+<% form_for([@issue, Note.new]) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :assunto %><br />
+    <%= f.text_field :subject %>
+  </p>
+  <p>
+    <%= f.label :conteúdo %><br />
+    <%= f.text_area :content %>
+  </p>
+
+  <p>
+    <%= f.label :status %><br />
+    <%= select :issue, :status_id, IssueStatus.find(:all).collect{|s| [s.name, s.id] } %>
+  </p>
+  <p>
+    <%= f.label :responsável %><br />
+    <%= select :issue, :responsible_id, [["Nenhum",false]] + User.find(:all).collect{|u| [u.login, u.id] } %>
+  </p>
+
+  <p>
+    <%= f.submit 'Atualizar' %>
+  </p>
+<% end %>
+
+</div>
