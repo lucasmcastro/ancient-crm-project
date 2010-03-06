@@ -1,5 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
   # Rotas simples
+  map.resources :information_categories
 
   map.resources :issue_statuses
 
@@ -18,7 +19,8 @@ ActionController::Routing::Routes.draw do |map|
   
   map.resources :accounts, :shallow => true, :except => ["index"] do |accounts|
     accounts.resource :address
-    accounts.resources :phones, :except => ["show"]
+    accounts.resources :facts, :except => ["show", "index"]
+    accounts.resources :phones, :except => ["show", "index"]
     accounts.resources :opportunities do |opportunities|
       opportunities.resources :interactions do |interactions|
         interactions.resources  :notes

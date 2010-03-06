@@ -35,3 +35,7 @@ InteractionType.create! :creator => admin, :name => 'E-mail'
 InteractionType.create! :creator => admin, :name => 'Visita'
 InteractionType.create! :creator => admin, :name => 'Reunião'
 
+InformationCategory.create! :category_type => 'Account', :name => 'Faturamento', :data_type => 'Flutuante'
+InformationCategory.create! :category_type => 'Account', :name => 'Número Funcionários', :data_type => 'Inteiro'
+InformationCategory.create! :category_type => 'Account', :name => 'Número de Máquinas', :data_type => 'Inteiro'
+

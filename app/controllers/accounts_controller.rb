@@ -4,6 +4,7 @@ class AccountsController < ApplicationController
   def show
     @account = Account.find(params[:id])
     @opportunities = @account.opportunities
+    @facts = @account.facts
 
     respond_to do |format|
       format.html # show.html.erb

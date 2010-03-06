@@ -4,6 +4,7 @@ class Account < ActiveRecord::Base
   belongs_to :creator, :class_name => 'User'
 
   has_one :address, :as => :addressable
+  has_many :facts, :as => :informable
   has_many :phones, :as => :callable
   has_many :opportunities
   

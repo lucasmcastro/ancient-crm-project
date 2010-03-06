@@ -16,6 +16,7 @@
   <%=h @account.manager.login %>
 </p>
   <%= link_to "Cadastrar telefone", new_account_phone_url(@account) %> | 
+  <%= link_to "Cadastrar informação", new_account_fact_url(@account) %> | 
 
 <% unless @account.address %>
   <%= link_to "Cadastrar endereço", new_account_address_url(@account) %>
@@ -45,6 +46,25 @@
   </tr>	
   <% end %>
 </table>
+
+<h3>Informações</h3>
+
+<table>
+  <tr>
+    <th>Tipo</th>
+    <th>Valor</th>
+  </tr>
+
+<% @facts.each do |fact| %>
+  <tr>
+    <td><%=h fact.information_category.name %></td>
+    <td><%=h fact.content %></td>
+    <td><%= link_to 'Alterar', edit_fact_path(fact) %></td>
+    <td><%= link_to 'Remover', fact, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
 
 <h3>Oportunidades</h3>
 
