@@ -1,0 +1,23 @@
+<h3>Lista de Categorias de Informação</h3>
+
+<table>
+  <tr>
+    <th>Nome</th>
+    <th>Tipo da Categoria</th>
+    <th>Tipo de Dado</th>
+  </tr>
+
+<% @information_categories.each do |information_category| %>
+  <tr>
+    <td><%=h information_category.name %></td>
+    <td><%=h information_category.category_type %></td>
+    <td><%=h information_category.data_type %></td>
+    <td><%= link_to 'Alterar', edit_information_category_path(information_category) %></td>
+    <td><%= link_to 'Remover', information_category, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'Adicionar categoria', new_information_category_path %>

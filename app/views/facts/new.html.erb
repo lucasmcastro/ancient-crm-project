@@ -1,0 +1,19 @@
+<h3>Adicionar informação</h3>
+
+<% form_for([@informable, @fact]) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :tipo %><br />
+    <%= collection_select :fact, :information_category_id, @categories, :id, :name %>
+  </p>
+  <p>
+    <%= f.label :valor %><br />
+    <%= f.text_field :content %>
+  </p>
+  <p>
+    <%= f.submit 'Adicionar' %>
+  </p>
+<% end %>
+
+<%= link_to 'Cancelar', @informable %>

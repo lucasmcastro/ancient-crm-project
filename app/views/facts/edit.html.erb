@@ -1,0 +1,19 @@
+<h1>Alterar Fatos</h1>
+
+<% form_for(@fact) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :tipo %><br />
+    <%= collection_select :fact, :information_category_id, @categories, :id, :name %>
+  </p>
+  <p>
+    <%= f.label :valor %><br />
+    <%= f.text_field :content %>
+  </p>
+  <p>
+    <%= f.submit 'Atualizar' %>
+  </p>
+<% end %>
+
+<%= link_to 'Cancelar', @informable %>

@@ -1,0 +1,21 @@
+<h3>Categoria de Informação</h3>
+
+<% form_for(@information_category) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :nome %><br />
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.label :tipo %><br />
+    <%= select :information_category, :category_type, options_for_select(@information_category.categorytype_choices) %>
+  </p>
+  <p>
+    <%= f.label :tipo_de_dados %><br />
+    <%= select :information_category, :data_type, options_for_select(@information_category.datatype_choices) %>
+  </p>
+  <p>
+    <%= f.submit 'Salvar' %>
+  </p>
+<% end %>
