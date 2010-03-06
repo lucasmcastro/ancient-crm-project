@@ -4,17 +4,24 @@
   <%= f.error_messages %>
 
   <p>
-    <%= f.label :gerente %><br />
-	<%= select :account, :manager_id, User.find(:all).collect{|u| [u.login, u.id] } %>
+    <%= f.label :nome_fantasia %><br />
+    <%= f.text_field :name %>
   </p>
   <p>
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
+    <%= f.label :cnpj %><br />
+    <%= f.text_field :cnpj %>
+  </p>
+  <p>
+    <%= f.label :razão_social %><br />
+    <%= f.text_field :legal_name %>
+  </p>
+  <p>
+    <%= f.label :gerente %><br />
+	<%= select :account, :manager_id, User.find(:all).collect{|u| [u.login, u.id] } %>
   </p>
   <p>
     <%= f.submit 'Update' %>
   </p>
 <% end %>
 
-<%= link_to 'Show', @account %> |
-<%= link_to 'Back', accounts_path %>
+<%= link_to 'Voltar para contas', home_path %>

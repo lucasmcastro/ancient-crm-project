@@ -16,8 +16,9 @@ ActionController::Routing::Routes.draw do |map|
     users.resource :address
   end
   
-  map.resources :accounts, :shallow => true do |accounts|
+  map.resources :accounts, :shallow => true, :except => ["index"] do |accounts|
     accounts.resource :address
+    accounts.resources :phones, :except => ["show"]
     accounts.resources :opportunities do |opportunities|
       opportunities.resources :interactions do |interactions|
         interactions.resources  :notes

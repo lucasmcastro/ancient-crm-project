@@ -2,7 +2,9 @@
 
 <table>
   <tr>
-    <th>Nome</th>	
+    <th>Nome Fantasia</th>	
+    <th>CNPJ</th>	
+    <th>Razão Social</th>	
     <th>Valor</th>
     <th>Interações</th>
     <th>Problemas</th>	
@@ -11,6 +13,8 @@
 <% @accounts.each do |account| %>
   <tr>
     <td><%=h account.name %> ( <%= account.opportunities.count %> )</td>
+    <td><%=h account.cnpj %> </td>
+    <td><%=h account.legal_name %> </td>
     <td>R$ <%= account.opportunities.sum(:value) %></td>
     <td><%= account.interactions_sum %></td>
     <td><%= account.open_issues_sum %>/<%= account.issues_sum %></td>

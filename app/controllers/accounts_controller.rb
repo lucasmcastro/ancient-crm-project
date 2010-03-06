@@ -1,14 +1,4 @@
 class AccountsController < ApplicationController
-  # GET /accounts
-  # GET /accounts.xml
-  def index
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @accounts }
-    end
-  end
-
   # GET /accounts/1
   # GET /accounts/1.xml
   def show
@@ -62,7 +52,7 @@ class AccountsController < ApplicationController
 
     respond_to do |format|
       if @account.update_attributes(params[:account])
-        flash[:notice] = 'Account was successfully updated.'
+        flash[:notice] = 'Conta foi atualizada com sucesso.'
         format.html { redirect_to(@account) }
         format.xml  { head :ok }
       else

@@ -1,8 +1,22 @@
-<h2> Conta <%= @account.name %></h2> 
+<h2> Conta </h2> 
+<p>
+  <b>Nome Fantasia:</b>
+  <%=h @account.name %>
+</p>
+<p>
+  <b>CNPJ:</b>
+  <%=h @account.cnpj %>
+</p>
+<p>
+  <b>Razão Social:</b>
+  <%=h @account.legal_name %>
+</p>
 <p>
   <b>Gerente:</b>
   <%=h @account.manager.login %>
 </p>
+  <%= link_to "Cadastrar telefone", new_account_phone_url(@account) %> | 
+
 <% unless @account.address %>
   <%= link_to "Cadastrar endereço", new_account_address_url(@account) %>
 <% else %>
@@ -10,6 +24,27 @@
   <%=h @account.address %>
   <%= link_to "Alterar endereço", edit_account_address_url(@account) %>
 <% end %>
+
+<h3>Telefones </h3>
+<table>
+  <tr>
+    <th>Número</th>
+	<th>Descrição</th>
+    <th>Operadora</th>
+    <th>Tipo</th>
+  </tr>
+
+  <% @account.phones.each do |phone| %>
+  <tr>
+    <td><%=h phone.number %></td>
+    <td><%=h phone.description %></td>
+    <td><%=h phone.company %></td>
+    <td><%=h phone.phone_type %></td>
+    <td><%= link_to 'Alterar', edit_phone_path(phone) %></td>
+    <td><%= link_to 'Remover', phone, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>	
+  <% end %>
+</table>
 
 <h3>Oportunidades</h3>
 

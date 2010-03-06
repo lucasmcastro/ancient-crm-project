@@ -1,0 +1,22 @@
+<h3>Telefones</h3>
+
+<table>
+  <tr>
+    <th>Número</th>
+    <th>Operadora</th>
+    <th>Tipo</th>
+  </tr>
+
+<% @phones.each do |phone| %>
+  <tr>
+    <td><%=h phone.number %></td>
+    <td><%=h phone.company %></td>
+    <td><%=h phone.phone_type %></td>
+    <td><%= link_to 'Alterar', edit_phone_path(phone) %></td>
+    <td><%= link_to 'Remover', phone, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+

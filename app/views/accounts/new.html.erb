@@ -4,12 +4,20 @@
   <%= f.error_messages %>
 
   <p>
-    <%= f.label :gerente %><br />
-	<%= select :account, :manager_id, User.find(:all).collect{|u| [u.login, u.id] } %>
+    <%= f.label :nome_fantasia %><br />
+    <%= f.text_field :name %><br />
   </p>
   <p>
-    <%= f.label :nome %><br />
-    <%= f.text_field :name %><br />
+    <%= f.label :cnpj %><br />
+    <%= f.text_field :cnpj %><br />
+  </p>
+  <p>
+    <%= f.label :razão_social %><br />
+    <%= f.text_field :legal_name %><br />
+  </p>
+  <p>
+    <%= f.label :gerente %><br />
+	<%= select :account, :manager_id, User.find(:all).collect{|u| [u.login, u.id] } %>
   </p>
   <p>
     <%= f.submit 'Salvar' %>

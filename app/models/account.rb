@@ -4,15 +4,18 @@ class Account < ActiveRecord::Base
   belongs_to :creator, :class_name => 'User'
 
   has_one :address, :as => :addressable
+  has_many :phones, :as => :callable
   has_many :opportunities
   
   # Atributos acessíveis para 'mass-assignment'
-  attr_accessible :name, :manager_id
+  attr_accessible :name, :manager_id, :legal_name, :cnpj
   
   # Atributos obrigatórios
   validates_presence_of :name
   validates_presence_of :creator
   validates_presence_of :manager
+  validates_presence_of :legal_name
+  validates_presence_of :cnpj
   
   # Verificar consistência de objetos relacionados
   validates_associated :creator
