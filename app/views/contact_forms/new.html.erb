@@ -1,0 +1,19 @@
+<h3>Adicionar forma de contato para <%= @contactable %></h3>
+
+<% form_for([@contactable, @contact_form]) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :tipo %><br />
+    <%= select :contact_form, :contact_type_id, ContactType.find(:all).collect{|c| [c.to_s, c.id]} %>
+  </p>
+  <p>
+    <%= f.label :contato %><br />
+    <%= f.text_field :contact %>
+  </p>
+  <p>
+    <%= f.submit 'Adicionar' %>
+  </p>
+<% end %>
+
+<%= link_to 'Cancelar', @contactable %>

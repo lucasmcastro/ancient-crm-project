@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100306210753) do
+ActiveRecord::Schema.define(:version => 20100308210027) do
 
   create_table "accounts", :force => true do |t|
     t.integer  "manager_id"
@@ -31,6 +31,22 @@ ActiveRecord::Schema.define(:version => 20100306210753) do
     t.string   "city"
     t.string   "state"
     t.string   "country"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "contact_forms", :force => true do |t|
+    t.integer  "contactable_id"
+    t.string   "contactable_type"
+    t.integer  "contact_type_id"
+    t.string   "contact"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "contact_types", :force => true do |t|
+    t.string   "category"
+    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -122,6 +138,13 @@ ActiveRecord::Schema.define(:version => 20100306210753) do
     t.integer  "creator_id"
     t.string   "name"
     t.integer  "order"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "people", :force => true do |t|
+    t.string   "forename"
+    t.string   "surname"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

@@ -13,6 +13,12 @@ ActionController::Routing::Routes.draw do |map|
   map.resource :session
   
   # Rotas aninhadas
+  map.resources :people, :shallow => true do |people|
+    people.resources :contact_forms, :except => ['index', 'show'] do |contact_forms|
+      contact_forms.resource :contact_type
+    end
+  end
+  
   map.resources :users, :shallow => true do |users|
     users.resource :address
   end

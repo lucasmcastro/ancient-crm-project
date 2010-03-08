@@ -1,0 +1,31 @@
+<p>
+  <b>Nome:</b>
+  <%=h @person.forename %>
+</p>
+
+<p>
+  <b>Sobrenome:</b>
+  <%=h @person.surname %>
+</p>
+
+<%= link_to 'Cadastrar Contato', new_person_contact_form_path(@person) %> |
+<%= link_to 'Alterar', edit_person_path(@person) %> |
+<%= link_to 'Voltar para Home', home_path %>
+
+<h3>Formas de Contato</h3>
+
+<table>
+  <tr>
+    <th>Tipo</th>
+    <th>Contato</th>
+  </tr>
+
+<% @person.contact_forms.each do |contact_form| %>
+  <tr>
+    <td><%=h contact_form.contact_type %></td>
+    <td><%=h contact_form.contact %></td>
+    <td><%= link_to 'Alterar', edit_contact_form_path(contact_form) %></td>
+    <td><%= link_to 'Remover', contact_form, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
