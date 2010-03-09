@@ -1,0 +1,15 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  creator: 
+  person: 
+  linkable: 
+  link_type: MyString
+  complement: MyString
+
+two:
+  creator: 
+  person: 
+  linkable: 
+  link_type: MyString
+  complement: MyString

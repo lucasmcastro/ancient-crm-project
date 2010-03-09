@@ -9,6 +9,7 @@
 </p>
 
 <%= link_to 'Cadastrar Contato', new_person_contact_form_path(@person) %> |
+<%= link_to 'Cadastrar Relacionamento', new_person_link_path(@person) %> |
 <%= link_to 'Alterar', edit_person_path(@person) %> |
 <%= link_to 'Voltar para Home', home_path %>
 
@@ -29,3 +30,24 @@
   </tr>
 <% end %>
 </table>
+
+<h3>Relacionamentos</h3>
+
+<table>
+  <tr>
+    <th>Tipo</th>
+    <th>Complemento</th>
+    <th>Relacionado</th>
+  </tr>
+
+<% @person.direct_links.each do |link| %>
+  <tr>
+    <td><%=h link.link_type %></td>
+    <td><%=h link.complement %></td>
+    <td><%=h link.linkable %></td>
+    <td><%= link_to 'Alterar', edit_link_path(link) %></td>
+    <td><%= link_to 'Remover', link, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+

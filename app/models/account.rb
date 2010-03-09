@@ -62,6 +62,10 @@ class Account < ActiveRecord::Base
   def open_issues_sum
     Account.open_issues(self.id).count
   end
+  
+  def to_s
+    "#{self.name}"
+  end
 
 # Adicionar noção de última interação, me fez pensar melhor na minha modelagem
 # e decidi que preciso pensar mais antes de adicionar essa noção.

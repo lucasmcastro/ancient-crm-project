@@ -1,0 +1,28 @@
+<p>
+  <b>Creator:</b>
+  <%=h @link.creator %>
+</p>
+
+<p>
+  <b>Person:</b>
+  <%=h @link.person %>
+</p>
+
+<p>
+  <b>Linkable:</b>
+  <%=h @link.linkable %>
+</p>
+
+<p>
+  <b>Link type:</b>
+  <%=h @link.link_type %>
+</p>
+
+<p>
+  <b>Complement:</b>
+  <%=h @link.complement %>
+</p>
+
+
+<%= link_to 'Edit', edit_link_path(@link) %> |
+<%= link_to 'Back', links_path %>

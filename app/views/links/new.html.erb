@@ -1,0 +1,23 @@
+<h3>Novo relacionamento para: <%= @person %></h3>
+
+<% form_for([@person, @link]) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :relacionado %><br />
+    <%= select :link, :linkable_id, Account.find(:all).collect {|a| [a.name, a.id]} %>
+  </p>
+  <p>
+    <%= f.label :tipo %><br />
+    <%= select :link, :link_type, options_for_select(@link.linktype_choices) %>
+  </p>
+  <p>
+    <%= f.label :complemento %><br />
+    <%= f.text_field :complement %>
+  </p>
+  <p>
+    <%= f.submit 'Adicionar' %>
+  </p>
+<% end %>
+
+<%= link_to 'Cancelar', @person %>

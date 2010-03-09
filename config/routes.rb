@@ -14,6 +14,7 @@ ActionController::Routing::Routes.draw do |map|
   
   # Rotas aninhadas
   map.resources :people, :shallow => true do |people|
+    people.resources :links, :except => ['index', 'show']
     people.resources :contact_forms, :except => ['index', 'show'] do |contact_forms|
       contact_forms.resource :contact_type
     end
