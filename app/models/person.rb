@@ -12,4 +12,8 @@ class Person < ActiveRecord::Base
   def to_s
     "#{self.forename} #{self.surname}"
   end
+  
+  def reverse_links
+    Link.person_links self.id
+  end
 end

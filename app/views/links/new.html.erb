@@ -3,13 +3,24 @@
 <% form_for([@person, @link]) do |f| %>
   <%= f.error_messages %>
 
+  <p>Tipo de relacionamento:</p> 
+  <p>
+  	<%= text_field :aux, :rel_to, {:value => @rel_to, :disabled => true } %> 
+  	<% if @rel == 'Account' %>
+  	(<%= link_to 'trocar', new_person_link_path(:rel => 'Person') %>)
+  	<% elsif @rel == 'Person' %>
+  	(<%= link_to 'trocar', new_person_link_path(:rel => 'Account') %>)
+  	<% end %>
+  </p>
+  <%= f.hidden_field :linkable_type, { :value => @rel } %>
+
   <p>
     <%= f.label :relacionado %><br />
-    <%= select :link, :linkable_id, Account.find(:all).collect {|a| [a.name, a.id]} %>
+    <%= select :link, :linkable_id, @linkable.collect {|l| [l.to_s, l.id]} %>
   </p>
   <p>
     <%= f.label :tipo %><br />
-    <%= select :link, :link_type, options_for_select(@link.linktype_choices) %>
+    <%= select :link, :link_type, options_for_select(@linktype_choices) %>
   </p>
   <p>
     <%= f.label :complemento %><br />

@@ -1,24 +1,19 @@
-<h1>Editing contact_form</h1>
+<h3>Alterar forma de contato para <%= @contactable %></h3>
 
 <% form_for(@contact_form) do |f| %>
   <%= f.error_messages %>
 
   <p>
-    <%= f.label :contactable %><br />
-    <%= f.text_field :contactable %>
+    <%= f.label :tipo %><br />
+    <%= select :contact_form, :contact_type_id, ContactType.find(:all).collect{|c| [c.to_s, c.id]} %>
   </p>
   <p>
-    <%= f.label :contact_type %><br />
-    <%= f.text_field :contact_type %>
-  </p>
-  <p>
-    <%= f.label :contact %><br />
+    <%= f.label :contato %><br />
     <%= f.text_field :contact %>
   </p>
   <p>
-    <%= f.submit 'Update' %>
+    <%= f.submit 'Atualizar' %>
   </p>
 <% end %>
 
-<%= link_to 'Show', @contact_form %> |
-<%= link_to 'Back', contact_forms_path %>
+<%= link_to 'cancelar', @contactable %>

@@ -4,7 +4,22 @@ class LinksController < ApplicationController
   def new
     @link = Link.new
     @person = Person.find(params[:person_id])
+    if params.has_key? :rel
+      @rel = params[:rel]
+    else
+      @rel = 'Account'
+    end
     
+    if @rel == 'Person'
+      @linkable = Person.all
+      @linktype_choices = @link.linktype_choices_for_person
+      @rel_to = 'Pessoa'
+    elsif @rel == 'Account'
+      @linkable = Account.all
+      @linktype_choices = @link.linktype_choices_for_account
+      @rel_to = 'Conta'
+    end
+
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @link }
@@ -15,6 +30,15 @@ class LinksController < ApplicationController
   def edit
     @link = Link.find(params[:id])
     @person = @link.person
+    @rel = @link.linkable_type
+    
+    if @rel == 'Person'
+      @linktype_choices = @link.linktype_choices_for_person
+    elsif @rel == 'Account'
+      @linktype_choices = @link.linktype_choices_for_account
+    end
+
+
   end
 
   # POST /links
@@ -24,7 +48,6 @@ class LinksController < ApplicationController
     @person = Person.find(params[:person_id])
     @link.creator = current_user
     @link.person = @person
-    @link.linkable_type = 'Account'
     
     respond_to do |format|
       if @link.save

@@ -5,7 +5,7 @@ class Link < ActiveRecord::Base
   belongs_to :linkable, :polymorphic => true
   
   # Atributos acessíveis via 'mass-assignment'
-  attr_accessible :creator_id, :person_id, :linkable, :linkable_id, :link_type, :complement
+  attr_accessible :creator_id, :person_id, :linkable, :linkable_id, :link_type, :complement, :linkable_type
   
   # Atributos obrigatórios
   validates_presence_of :creator_id
@@ -19,14 +19,35 @@ class Link < ActiveRecord::Base
   validates_associated :person
   validates_associated :linkable
   
+  # Filtros
+  named_filter(:account_links) do |account_id|
+    with(:linkable_id, account_id)
+    with(:linkable_type, 'Account')
+  end
+  
+  named_filter(:person_links) do |person_id|
+    with(:linkable_id, person_id)
+    with(:linkable_type, 'Person')
+  end
+
   # Definições
   def to_s
     "#{self.link.type}: #{self.person} => #{self.complement} => #{self.linkable}"
   end
   
-  def linktype_choices
-    [['Cargo','Employment'],
-    ['Parentesco','Kinship'],
+  def linktype_choices_for_person
+    [['Parentesco','Kinship'],
     ['Relacionado','Related']] 
+  end
+  
+  def linktype_choices_for_account
+    [['Cargo','Employment'],
+    ['Relacionado','Related']] 
+  end
+  
+  def friendly_link_type
+    return "Parentesco" if self.link_type == 'Kinship'
+    return "Relacionado" if self.link_type == 'Related'
+    return "Cargo" if self.link_type == 'Employment'
   end
 end

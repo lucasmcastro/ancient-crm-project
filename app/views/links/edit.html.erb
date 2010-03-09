@@ -1,32 +1,22 @@
-<h1>Editing link</h1>
+<h1>Alterar relacionamento</h1>
 
-<% form_for(@link) do |f| %>
+<% form_for @link, :action => 'update' do |f| %>
   <%= f.error_messages %>
-
   <p>
-    <%= f.label :creator %><br />
-    <%= f.text_field :creator %>
+    <%= f.label :relacionado %><br />
+    <%= f.text_field :linkable, {:value => @link.linkable.to_s, :disabled => true } %>
   </p>
   <p>
-    <%= f.label :person %><br />
-    <%= f.text_field :person %>
+    <%= f.label :tipo %><br />
+    <%= select :link, :link_type, options_for_select(@linktype_choices) %>
   </p>
   <p>
-    <%= f.label :linkable %><br />
-    <%= f.text_field :linkable %>
-  </p>
-  <p>
-    <%= f.label :link_type %><br />
-    <%= f.text_field :link_type %>
-  </p>
-  <p>
-    <%= f.label :complement %><br />
+    <%= f.label :complemento %><br />
     <%= f.text_field :complement %>
   </p>
   <p>
-    <%= f.submit 'Update' %>
+    <%= f.submit 'Atualizar' %>
   </p>
 <% end %>
 
-<%= link_to 'Show', @link %> |
-<%= link_to 'Back', links_path %>
+<%= link_to 'Cancelar', @person %>

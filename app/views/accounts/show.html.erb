@@ -65,6 +65,27 @@
 <% end %>
 </table>
 
+<h3>Pessoas</h3>
+
+<table>
+  <tr>
+  	<th>Nome</th>
+    <th>Relacionamento</th>
+    <th>Complemento</th>
+  </tr>
+
+<% @account.links.each do |link| %>
+  <tr>
+    <td><%=h link.person %></td>
+    <td><%=h link.friendly_link_type %></td>
+    <td><%=h link.complement %></td>
+    <td><%= link_to 'Alterar', edit_link_path(link) %></td>
+    <td><%= link_to 'Remover', link, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+
 
 <h3>Oportunidades</h3>
 

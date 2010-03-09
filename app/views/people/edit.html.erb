@@ -1,20 +1,19 @@
-<h1>Editing person</h1>
+<h3>Alterar Pessoa</h3>
 
 <% form_for(@person) do |f| %>
   <%= f.error_messages %>
 
   <p>
-    <%= f.label :forename %><br />
+    <%= f.label :nome %><br />
     <%= f.text_field :forename %>
   </p>
   <p>
-    <%= f.label :surname %><br />
+    <%= f.label :sobrenome %><br />
     <%= f.text_field :surname %>
   </p>
   <p>
-    <%= f.submit 'Update' %>
+    <%= f.submit 'Atualizar' %>
   </p>
 <% end %>
 
-<%= link_to 'Show', @person %> |
-<%= link_to 'Back', people_path %>
+<%= link_to 'Cancelar', home_path %>

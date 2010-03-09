@@ -31,7 +31,7 @@
 <% end %>
 </table>
 
-<h3>Relacionamentos</h3>
+<h3>Relacionamentos Diretos</h3>
 
 <table>
   <tr>
@@ -42,7 +42,7 @@
 
 <% @person.direct_links.each do |link| %>
   <tr>
-    <td><%=h link.link_type %></td>
+    <td><%=h link.friendly_link_type %></td>
     <td><%=h link.complement %></td>
     <td><%=h link.linkable %></td>
     <td><%= link_to 'Alterar', edit_link_path(link) %></td>
@@ -51,3 +51,22 @@
 <% end %>
 </table>
 
+<h3>Relacionamentos Reversos</h3>
+
+<table>
+  <tr>
+    <th>Pessoa</th>
+    <th>Tipo</th>
+    <th>Complemento</th>
+  </tr>
+
+<% @person.reverse_links.each do |link| %>
+  <tr>
+    <td><%=h link.person %></td>
+    <td><%=h link.friendly_link_type %></td>
+    <td><%=h link.complement %></td>
+    <td><%= link_to 'Alterar', edit_link_path(link) %></td>
+    <td><%= link_to 'Remover', link, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>

@@ -22,7 +22,7 @@ class Account < ActiveRecord::Base
   validates_associated :creator
   validates_associated :manager
 
-  # Filters
+  # Filters  
   named_filter(:interactions) do |account_id|
     with(:id, account_id)
     having(:opportunities) do
@@ -61,6 +61,10 @@ class Account < ActiveRecord::Base
 
   def open_issues_sum
     Account.open_issues(self.id).count
+  end
+  
+  def links
+    Link.account_links self.id
   end
   
   def to_s
