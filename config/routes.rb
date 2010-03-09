@@ -1,5 +1,9 @@
 ActionController::Routing::Routes.draw do |map|
   # Rotas simples
+  map.resources :opportunities, :only => ['index']
+  map.resources :accounts, :only => ['index']
+  map.resources :people, :only => ['index']
+  
   map.resources :information_categories
 
   map.resources :issue_statuses
@@ -13,17 +17,6 @@ ActionController::Routing::Routes.draw do |map|
   map.resource :session
   
   # Rotas aninhadas
-  map.resources :people, :shallow => true do |people|
-    people.resources :links, :except => ['index', 'show']
-    people.resources :contact_forms, :except => ['index', 'show'] do |contact_forms|
-      contact_forms.resource :contact_type
-    end
-  end
-  
-  map.resources :users, :shallow => true do |users|
-    users.resource :address
-  end
-  
   map.resources :accounts, :shallow => true, :except => ["index"] do |accounts|
     accounts.resource :address
     accounts.resources :facts, :except => ["show", "index"]
@@ -37,7 +30,18 @@ ActionController::Routing::Routes.draw do |map|
       end
     end
   end
+
+  map.resources :people, :shallow => true do |people|
+    people.resources :links, :except => ['index', 'show']
+    people.resources :contact_forms, :except => ['index', 'show'] do |contact_forms|
+      contact_forms.resource :contact_type
+    end
+  end
   
+  map.resources :users, :shallow => true do |users|
+    users.resource :address
+  end
+    
   # Rotas manuais
   map.logout '/logout', :controller => 'sessions', :action => 'destroy'
   map.login '/login', :controller => 'sessions', :action => 'new'

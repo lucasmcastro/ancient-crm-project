@@ -1,7 +1,16 @@
-<h2> Problema: <%=h @issue.subject %> </h2>
+<% content_for :shortcuts do %>
+<ul>
+	<li><%= link_to "Voltar para Oportunidade", @opportunity%></li>
+	<li><%= link_to_function("Atualizar Problema", "$('add_note').show()") %></li>
+	<li><%= link_to 'Remover Problema', @issue, :confirm => 'Are you sure?', :method => :delete %></li>
+</ul>
+<% end %>
+
+<h2>Detalhes de Problema</h2>
 
 <table>
   <tr>
+  	<th>Assunto</th>
 	<th>Conteúdo</th>
     <th>Status</th>
     <th>Data</th>
@@ -10,17 +19,14 @@
   </tr>
 
   <tr>  	
+  	<td><%=h @issue.subject %></td>
     <td><%=h @issue.content %></td>
     <td><%=h @issue.status %></td>
     <td><%=h @issue.created_at.strftime("%D as %H:%M") %></td>
     <td><%=h @issue.creator %></td>
     <td><%=h @issue.responsible %></td>	
-	<td><%= link_to_function("Atualizar", "$('add_note').show()") %></td>
-    <td><%= link_to 'Remover', @issue, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 </table>
-
-<%= link_to "voltar para oportunidade", @opportunity%>
 
 <h2>Notas associadas</h2>
 <table>
@@ -39,6 +45,7 @@
 
 
 <div id="add_note" style="display:none">
+	<h2>Atualizar Problema</h2>
 <% form_for([@issue, Note.new]) do |f| %>
   <%= f.error_messages %>
 

@@ -1,3 +1,13 @@
+<% content_for :shortcuts do %>
+<ul>
+	<li><%= link_to 'Voltar para conta', @account %></li>
+	<li><%= link_to 'Nova Interação Comercial', new_opportunity_interaction_path(@opportunity)%></li>
+	<li><%= link_to 'Nova Interação Técnica', new_opportunity_issue_path(@opportunity)%></li>
+</ul>
+<% end %>
+
+<h2> Detalhes de Oportunidade</h2>
+
 <table id="mytable" cellspacing="0" summary="Detalhes da oportunidade <%=h @opportunity.product.name %>">
 <caption>Criada em <%= @opportunity.created_at %> por <%=h @opportunity.creator %></caption>
 <tr>
@@ -19,11 +29,7 @@
 </tr>
 </table>
 
-<%= link_to 'Voltar para conta', @account %>
-<%= link_to 'Nova Interação Comercial', new_opportunity_interaction_path(@opportunity)%>
-<%= link_to 'Nova Interação Técnica', new_opportunity_issue_path(@opportunity)%>
-
-<h3> Interações Comerciais </h3>
+<h2>Interações Comerciais</h2>
 
 <table>
   <tr>
@@ -46,7 +52,7 @@
 <% end %>
 </table>
 
-<h3> Interações Técnicas </h3>
+<h2>Interações Técnicas</h2>
 
 <table>
   <tr>

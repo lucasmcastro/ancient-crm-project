@@ -1,5 +1,11 @@
-<h3>Usuários</h3>
+<% content_for :shortcuts do %>
+<ul>
+<li><%= link_to "Adicionar Usuário", new_user_path %></li>
+</ul>
 
+<% end %>
+
+<h2>Todos os Usuários</h2>
 
 <table>
   <tr>
@@ -17,7 +23,4 @@
   </tr>
 <% end %>
 </table>
-
-<br /><br />
-<%= link_to "Novo usuário", new_user_path %> | 
-<%= link_to "Voltar para home", home_path %>
+ 

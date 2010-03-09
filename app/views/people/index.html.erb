@@ -1,0 +1,27 @@
+<% content_for :shortcuts do %>
+<ul>
+<li><%= link_to 'Adicionar Pessoa', new_account_path %></li>
+</ul>
+
+<% end %>
+
+<h2>Todas as Pessoas</h2>
+
+<table>
+  <tr>
+    <th>Nome</th>	
+    <th>Sobrenome</th>
+  </tr>
+
+<% @people.each do |person| %>
+  <tr>
+    <td><%=h person.forename %></td>
+    <td><%=h person.surname %> </td>
+    <td><%= link_to 'Detalhes', person %></td>
+    <td><%= link_to 'Alterar', edit_person_path(person) %></td>
+    <td><%= link_to 'Remover', person, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br /> 

@@ -12,6 +12,11 @@
 <body>
 
 <%= render :partial => "users/user_bar" %>
+<hr />
+<%= render :partial => "layouts/main_menu" %>
+<hr />
+<%= yield :shortcuts %>
+<hr />
 
 <p style="color: green"><%= flash[:notice] %></p>
 

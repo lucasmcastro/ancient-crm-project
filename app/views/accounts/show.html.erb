@@ -1,32 +1,40 @@
-<h2> Conta </h2> 
+<% content_for :shortcuts do %>
+<ul>
+	<li><%= link_to "Incluir Telefone", new_account_phone_url(@account) %></li>
+	<li><%= link_to "Incluir Informação", new_account_fact_url(@account) %></li>
+	<li><%= link_to 'Adicionar Oportunidade', new_account_opportunity_path(@account) %></li>
+	<% unless @account.address %>
+	<li><%= link_to "Incluir Endereço", new_account_address_url(@account) %></li>
+	<% end %>
+</ul>
+<% end %>
+
+<h2> Detalhes de Conta </h2> 
 <p>
-  <b>Nome Fantasia:</b>
+  <strong>Nome Fantasia:</strong>
   <%=h @account.name %>
 </p>
 <p>
-  <b>CNPJ:</b>
+  <strong>CNPJ:</strong>
   <%=h @account.cnpj %>
 </p>
 <p>
-  <b>Razão Social:</b>
+  <strong>Razão Social:</strong>
   <%=h @account.legal_name %>
 </p>
 <p>
-  <b>Gerente:</b>
+  <strong>Gerente:</strong>
   <%=h @account.manager.login %>
 </p>
-  <%= link_to "Cadastrar telefone", new_account_phone_url(@account) %> | 
-  <%= link_to "Cadastrar informação", new_account_fact_url(@account) %> | 
+   
+<p>
+  <strong>Endereço: </strong> <%=h @account.address %>
+  <% if @account.address %>
+  ( <%= link_to "Alterar endereço", edit_account_address_url(@account) %> )
+  <% end %>
+</p>
 
-<% unless @account.address %>
-  <%= link_to "Cadastrar endereço", new_account_address_url(@account) %>
-<% else %>
-<h3> Endereço </h3>
-  <%=h @account.address %>
-  <%= link_to "Alterar endereço", edit_account_address_url(@account) %>
-<% end %>
-
-<h3>Telefones </h3>
+<h2>Telefones para Contato</h2>
 <table>
   <tr>
     <th>Número</th>
@@ -47,7 +55,7 @@
   <% end %>
 </table>
 
-<h3>Informações</h3>
+<h2>Informações</h2>
 
 <table>
   <tr>
@@ -65,7 +73,7 @@
 <% end %>
 </table>
 
-<h3>Pessoas</h3>
+<h2>Pessoas</h2>
 
 <table>
   <tr>
@@ -87,7 +95,7 @@
 
 
 
-<h3>Oportunidades</h3>
+<h2>Oportunidades</h2>
 
 <% @opportunities.each do |opportunity| %>
 <table id="mytable" cellspacing="0" summary="Oportunidades">
@@ -112,9 +120,3 @@
 </table>
 
 <% end %>
-
-
-<br />
-
-<%= link_to 'Nova Oportunidade', new_account_opportunity_path(@account) %>
-<%= link_to 'Voltar', home_path %>
