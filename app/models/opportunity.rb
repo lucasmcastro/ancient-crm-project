@@ -35,6 +35,19 @@ class Opportunity < ActiveRecord::Base
   def important_attributes
     ["manager_id", "opportunity_status_id", "product_id", "value"]
   end
-
   
+  def translated_attribute(attribute_name)
+    case attribute_name
+      when 'manager_id'
+        'Gerente'
+      when 'opportunity_status_id'
+        'Status'
+      when 'product_id'
+        'Produto'
+      when 'value'
+        'Valor'
+      else
+        attribute_name
+    end
+  end
 end

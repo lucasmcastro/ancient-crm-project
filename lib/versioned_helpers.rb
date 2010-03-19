@@ -34,14 +34,49 @@ module VersionedHelpers
       current_attributes = get_version_attributes(current_version)
       
       previous_attributes.each do |attr,value|
-        changes[attr] = [ value, current_attributes[attr] ] if is_important? attr and value != current_attributes[attr]   
+      if is_important? attr and value != current_attributes[attr]
+        attr_display = self.translated_attribute(attr)
+        attr_values = humanized_values(attr, value, current_attributes[attr])
+        changes[attr_display] = attr_values
       end      
     end
     changes
   end
-  
+end 
   
   protected
+  # Busca por atributos de id, quando o atributo ao invés de
+  # representar uma característica do modelo, na verdade 
+  # representa o id de objetos relacionado ao modelo.
+  #
+  # Se esse método for utilizado com um atributo normal,
+  # irá retornar os valores originais "old_value", "new_value" 
+  # sem alterações.
+  # 
+  # Rastreando exemplo com atributo de id:
+  # humanized_values('opportunity_status_id', 1, 2)
+  #   => related_object = #<MatchData "opportunity_status_id" 1:"opportunity_status">
+  #   => klass = OportunityStatus
+  #   => return [OportunityStatus.find(1).to_s, OportunityStatus.find(2).to_s]
+  # 
+  # Rastreando exemplo com atributo normal:
+  # humanized_values('value', 0.0, 23000.0)
+  #   => related_object = nil
+  #   => return [0.0, 23000.0]  
+  def humanized_values(original_attribute, old_value, new_value)
+    id_regexp = /(.*)_id$/
+    # Busque um atributo do tipo teste_id
+    related_object = original_attribute.match(id_regexp)
+    
+    if related_object
+      # Consiga uma referência da classe Teste
+      klass = (self.send related_object[1]).class
+      return [klass.find(old_value).to_s, klass.find(new_value).to_s]
+    else
+      return [old_value, new_value]
+    end
+  end
+  
   # Determina se o atributo em questão é considerado importante
   def is_important?(attribute_name)
     self.important_attributes.include? attribute_name

@@ -4,7 +4,7 @@
   	<td>
 	  <% if note.versionable_version and not note.versionable_version.zero? %>
 		<% note.versionable.important_changes(note.versionable_version).each do |k,v| %>
-	    <p><%= "#{k} changed from #{v[0]} to #{v[1]}" %></p>
+	    <p><%= "#{k} mudou de '#{v[0]}' para '#{v[1]}'" %></p>
 		<% end %>
 	  <% else %>
 		<p>-</p>

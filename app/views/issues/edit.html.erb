@@ -5,7 +5,7 @@
 
   <p>
     <%= f.label :status %><br />
-    <%= select :issue, :status_id, IssueStatus.find(:all).collect{|i| [i.name, i.id]} %>
+    <%= select :issue, :issue_status_id, IssueStatus.find(:all).collect{|i| [i.name, i.id]} %>
   </p>
   <p>
     <%= f.label :responsável %><br />

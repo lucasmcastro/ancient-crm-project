@@ -6,6 +6,7 @@
 #   cities = City.create([{ :name => 'Chicago' }, { :name => 'Copenhagen' }])
 #   Major.create(:name => 'Daley', :city => cities.first)
 
+User.create! :login => 'Nenhum', :password => 'nullnull', :password_confirmation => 'nullnull', :email => 'null@crm.com.br'
 admin = User.create! :login => 'admin', :password => 'crmadmin', :password_confirmation => 'crmadmin', :email => 'admin@crm.com.br'
 
 OpportunityStatus.create! :creator => admin, :name => 'Definição', :order => 1

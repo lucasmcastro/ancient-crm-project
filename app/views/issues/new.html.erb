@@ -5,11 +5,11 @@
 
   <p>
     <%= f.label :status %><br />
-    <%= select :issue, :status_id, IssueStatus.find(:all).collect{|s| [s.name, s.id] } %>
+    <%= select :issue, :issue_status_id, IssueStatus.find(:all).collect{|s| [s.name, s.id] } %>
   </p>
   <p>
     <%= f.label :responsável %><br />
-    <%= select :issue, :responsible_id, [["Nenhum",false]] + User.find(:all).collect{|u| [u.login, u.id] } %>
+    <%= select :issue, :responsible_id, User.find(:all).collect{|u| [u.login, u.id] } %>
   </p>
   <p>
     <%= f.label :assunto %><br />

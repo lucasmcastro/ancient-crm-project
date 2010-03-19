@@ -41,7 +41,7 @@ class Account < ActiveRecord::Base
     with(:id, account_id)
     having(:opportunities) do
       having(:issues) do
-        having(:status) do
+        having(:issue_status) do
           any_of do
             with(:name).in ['Novo', 'Atribuído', 'Reaberto'] 
           end
