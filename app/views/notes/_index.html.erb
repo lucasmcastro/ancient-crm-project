@@ -2,14 +2,14 @@
     <td><%=h note.created_at.strftime("%D as %H:%M") %></td>
     <td><%=h note.creator %></td>
   	<td>
-	  <% if note.commentable_version and not note.commentable_version.zero? %>
-		<% note.commentable.important_changes(note.commentable_version).each do |k,v| %>
+	  <% if note.versionable_version and not note.versionable_version.zero? %>
+		<% note.versionable.important_changes(note.versionable_version).each do |k,v| %>
 	    <p><%= "#{k} changed from #{v[0]} to #{v[1]}" %></p>
 		<% end %>
 	  <% else %>
 		<p>-</p>
 	  <% end %>
-</ul>	
+
 	</td>
     <td><%=h note.subject %></td>
     <td><%=h note.content %></td>

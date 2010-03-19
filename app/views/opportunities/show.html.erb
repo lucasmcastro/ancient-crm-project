@@ -31,6 +31,9 @@
 
 <h2>Interações Comerciais</h2>
 
+<% @interactions.each do |interaction| %>
+
+<p>Interação: </p>
 <table>
   <tr>
     <th>Assunto</th>
@@ -39,7 +42,6 @@
 	<th>Notas</th>
   </tr>
 
-<% @interactions.each do |interaction| %>
   <tr>
     <td><%=h interaction.subject %></td>
     <td><%=h interaction.type %></td>
@@ -49,8 +51,27 @@
     <td><%= link_to 'Alterar', edit_interaction_path(interaction) %></td>
     <td><%= link_to 'Remover', interaction, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
+</table>
+  <% if interaction.notes.count > 0 %>
+  <p>Notas:</p>
+<table>
+  <tr>
+    <th>Data</th>
+    <th>Relator</th>
+    <th>Mudanças na Oportunidade</th>	
+    <th>Título</th>
+    <th>Conteúdo</th>
+  </tr>
+
+<% interaction.notes.each do |note| %>
+  <%= render :partial => 'notes/index', :locals => {:note => note} %>
 <% end %>
 </table>
+<% end %>
+ 
+<% end %>
+
+
 
 <h2>Interações Técnicas</h2>
 

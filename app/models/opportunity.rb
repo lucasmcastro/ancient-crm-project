@@ -1,4 +1,8 @@
 class Opportunity < ActiveRecord::Base
+  # Comportamentos
+  versioned
+  include VersionedHelpers
+
   # Relacionamentos
   belongs_to :manager, :class_name => 'User'
   belongs_to :creator, :class_name => 'User'
@@ -26,6 +30,11 @@ class Opportunity < ActiveRecord::Base
   validates_associated :creator
   validates_associated :product
   validates_associated :opportunity_status
-  
+
+  # Definições
+  def important_attributes
+    ["manager_id", "opportunity_status_id", "product_id", "value"]
+  end
+
   
 end

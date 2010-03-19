@@ -39,7 +39,7 @@
   </tr>
 
 <% @notes.each do |note| %>
-  <%= render :partial => 'notes/index', :locals => {:note => note, :notes => @notes} %>
+  <%= render :partial => 'notes/index', :locals => {:note => note} %>
 <% end %>
 </table>
 

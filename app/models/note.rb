@@ -15,5 +15,15 @@ class Note < ActiveRecord::Base
   # Verificar consistência dos objetos relacionados
   validates_associated :creator
   validates_associated :commentable
- 
+
+  # Definições
+  def versionable
+    if self.commentable.class.class_name == 'Issue'
+      return self.commentable
+    elsif self.commentable.class.class_name == 'Interaction'
+      return self.commentable.opportunity
+    else
+      return nil
+    end
+  end
 end

@@ -3,7 +3,7 @@
 	<li><%= link_to 'Voltar para Oportunidade', @opportunity %></li>
   	<li><%= link_to 'Alterar Interação', edit_interaction_path(@interaction) %></li>
 	<li><%= link_to 'Remover Interação', @interaction, :confirm => 'Are you sure?', :method => :delete %></li>
-	<li><%= link_to 'Atualizar Interação', new_interaction_note_url(@opportunity) %></li>
+	<li><%= link_to_function("Atualizar Interação", "$('add_note').show()") %></li>	
   </ul>
 <% end %>
 <h2>Detalhes de Interação Comercial</h2>
@@ -28,11 +28,52 @@
   <tr>
     <th>Data</th>
     <th>Relator</th>
+    <th>Mudanças na Oportunidade</th>	
     <th>Título</th>
     <th>Conteúdo</th>
   </tr>
 
 <% @notes.each do |note| %>
-  <%= render :partial => 'notes/index', :locals => {:note => note, :notes => @notes} %>
+  <%= render :partial => 'notes/index', :locals => {:note => note} %>
 <% end %>
 </table>
+
+<div id="add_note" style="display:none">
+	<h2>Atualizar Problema</h2>
+<% form_for([@interaction, Note.new]) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :assunto %><br />
+    <%= f.text_field :subject %>
+  </p>
+  <p>
+    <%= f.label :conteúdo %><br />
+    <%= f.text_area :content %>
+  </p>
+
+  
+  <p>
+    <%= f.label :valor %><br />
+    <%= text_field :opportunity, :value %>
+  </p>
+  <p>
+    <%= f.label :produto %><br />
+    <%= select :opportunity, :product_id, Product.find(:all).collect{|p| [p.to_s, p.id] } %>
+  </p>
+  <p>
+    <%= f.label :status %><br />
+    <%= select :opportunity, :opportunity_status_id, OpportunityStatus.find(:all).collect{|os| [os.to_s, os.id] } %>
+  </p>
+  <p>
+    <%= f.label :gerente %><br />
+    <%= select :opportunity, :manager_id, [["Nenhum",false]] + User.find(:all).collect{|u| [u.login, u.id] } %>
+  </p>
+
+  <p>
+    <%= f.submit 'Atualizar' %>
+  </p>
+<% end %>
+
+</div>
+

@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100309014127) do
+ActiveRecord::Schema.define(:version => 20100319002146) do
 
   create_table "accounts", :force => true do |t|
     t.integer  "manager_id"
@@ -131,7 +131,7 @@ ActiveRecord::Schema.define(:version => 20100309014127) do
     t.text     "content"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "commentable_version"
+    t.integer  "versionable_version"
   end
 
   create_table "opportunities", :force => true do |t|

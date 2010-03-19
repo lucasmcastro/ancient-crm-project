@@ -45,10 +45,11 @@ class NotesController < ApplicationController
     @note = Note.new(params[:note])
     @note.creator = current_user
     @note.commentable = @commentable
+    @versionable = @note.versionable
 
-    commentable_key = @commentable.class.class_name.downcase.to_sym
-    @commentable.update_attributes(params[commentable_key]) if params.has_key? commentable_key
-    @note.commentable_version = @commentable.version if (@note.valid? and @commentable.respond_to? :version)
+    versionable_key = @versionable.class.class_name.downcase.to_sym
+    @versionable.update_attributes(params[versionable_key]) if params.has_key? versionable_key
+    @note.versionable_version = @versionable.version if (@note.valid? and @versionable.respond_to? :version)
     
     respond_to do |format|
       if @note.save
