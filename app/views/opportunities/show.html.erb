@@ -1,6 +1,8 @@
 <% content_for :shortcuts do %>
 <ul>
 	<li><%= link_to 'Voltar para conta', @account %></li>
+  	<li><%= link_to 'Alterar Oportunidade', edit_opportunity_path(@opportunity) %></li> 
+	<li><%= link_to 'Remover Oportunidade', @opportunity, :confirm => 'Tem Certeza?', :method => :delete %></li>
 	<li><%= link_to 'Nova Interação Comercial', new_opportunity_interaction_path(@opportunity)%></li>
 	<li><%= link_to 'Nova Interação Técnica', new_opportunity_issue_path(@opportunity)%></li>
 </ul>
@@ -8,26 +10,10 @@
 
 <h2> Detalhes de Oportunidade</h2>
 
-<table id="mytable" cellspacing="0" summary="Detalhes da oportunidade <%=h @opportunity.product.name %>">
-<caption>Criada em <%= @opportunity.created_at %> por <%=h @opportunity.creator %></caption>
-<tr>
-  <th scope="col" abbr="Produto"><%=h @opportunity.product %></th>
-  <th scope="col" abbr="Opções">
-	    <%= link_to 'Detalhes', @opportunity %> | 
-  	    <%= link_to 'Alterar', edit_opportunity_path(@opportunity) %> | 
-	    <%= link_to 'Remover', @opportunity, :confirm => 'Tem Certeza?', :method => :delete %>
-  </th>
-</tr>
-<tr>
-  <th scope="row" class="specalt" abbr="Valor">Valor: R$ <%=h @opportunity.value %></th>
-  <td>Atualmente em: <%=h @opportunity.opportunity_status %></td>
-</tr>
-<tr>
-	<td>  	
-    </td>
-    <td>Gerenciada por: <%=h @opportunity.manager %></td>
-</tr>
-</table>
+  <p>Produto: <strong><%=h @opportunity.product %></th></strong></p>
+  <p>Valor: <strong>R$ <%=h @opportunity.value %></strong></p>
+  <p>Status: <strong><%=h @opportunity.opportunity_status %></strong></p>
+  <p>Gerente: <strong><%=h @opportunity.manager %></strong></p>
 
 <h2>Interações Comerciais</h2>
 
@@ -53,14 +39,12 @@
   </tr>
 </table>
   <% if interaction.notes.count > 0 %>
-  <p>Notas:</p>
+  <p>Comentários:</p>
 <table>
   <tr>
     <th>Data</th>
-    <th>Relator</th>
     <th>Mudanças na Oportunidade</th>	
-    <th>Título</th>
-    <th>Conteúdo</th>
+    <th>Comentário</th>
   </tr>
 
 <% interaction.notes.each do |note| %>

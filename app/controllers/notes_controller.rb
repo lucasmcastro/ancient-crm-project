@@ -1,26 +1,4 @@
 class NotesController < ApplicationController
-  # GET /notes
-  # GET /notes.xml
-  def index
-    @notes = Note.all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @notes }
-    end
-  end
-
-  # GET /notes/1
-  # GET /notes/1.xml
-  def show
-    @note = Note.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.xml  { render :xml => @note }
-    end
-  end
-
   # GET /notes/new
   # GET /notes/new.xml
   def new
@@ -53,7 +31,7 @@ class NotesController < ApplicationController
     
     respond_to do |format|
       if @note.save
-        flash[:notice] = 'Note was successfully created.'
+        flash[:notice] = 'Comentário adicionado com sucesso.'
         format.html { redirect_to(@commentable) }
         format.xml  { render :xml => @note, :status => :created, :location => @commentable }
       else
@@ -67,11 +45,12 @@ class NotesController < ApplicationController
   # PUT /notes/1.xml
   def update
     @note = Note.find(params[:id])
+    @commentable = @note.commentable
 
     respond_to do |format|
       if @note.update_attributes(params[:note])
-        flash[:notice] = 'Note was successfully updated.'
-        format.html { redirect_to(@note) }
+        flash[:notice] = 'Comentário atualizado com sucesso.'
+        format.html { redirect_to(@commentable) }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }

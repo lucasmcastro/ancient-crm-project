@@ -1,11 +1,13 @@
 <% content_for :shortcuts do %>
 <ul>
-	<li><%= link_to "Incluir Telefone", new_account_phone_url(@account) %></li>
-	<li><%= link_to "Incluir Informação", new_account_fact_url(@account) %></li>
-	<li><%= link_to 'Adicionar Oportunidade', new_account_opportunity_path(@account) %></li>
+	<li><%= link_to "Alterar Conta", edit_account_url(@account) %></li>
+	<li><%= link_to "Remover Conta", @account, :confirm => 'Tem certeza?', :method => :delete %></li>
 	<% unless @account.address %>
 	<li><%= link_to "Incluir Endereço", new_account_address_url(@account) %></li>
 	<% end %>
+	<li><%= link_to "Incluir Telefone", new_account_phone_url(@account) %></li>
+	<li><%= link_to "Incluir Informação", new_account_fact_url(@account) %></li>
+	<li><%= link_to 'Adicionar Oportunidade', new_account_opportunity_path(@account) %></li>
 </ul>
 <% end %>
 
@@ -31,10 +33,13 @@
   <strong>Endereço: </strong> <%=h @account.address %>
   <% if @account.address %>
   ( <%= link_to "Alterar endereço", edit_account_address_url(@account) %> )
+  <% else %>
+  Ainda não foi cadastrado. (<%= link_to "Cadastrar", new_account_address_url(@account) %>)
   <% end %>
 </p>
 
 <h2>Telefones para Contato</h2>
+<% unless @account.phones.count.zero? %>
 <table>
   <tr>
     <th>Número</th>
@@ -54,9 +59,12 @@
   </tr>	
   <% end %>
 </table>
-
+<% else %>
+<p>Ainda não existem telefones cadastrados. (<%= link_to "Cadastrar", new_account_phone_url(@account) %>)</p>
+<% end %>
 <h2>Informações</h2>
 
+<% unless @facts.count.zero? %>
 <table>
   <tr>
     <th>Tipo</th>
@@ -72,9 +80,13 @@
   </tr>
 <% end %>
 </table>
+<% else %>
+<p>Ainda não existem informações associadas a essa conta. (<%= link_to "Adicionar", new_account_fact_url(@account) %>)</p>
+<% end %>
 
 <h2>Pessoas</h2>
 
+<% unless @account.links.count.zero? %>
 <table>
   <tr>
   	<th>Nome</th>
@@ -92,31 +104,31 @@
   </tr>
 <% end %>
 </table>
+<% else %>
+<p>Ainda não existem pessoas associadas a essa conta.</p>
+<% end %>
 
 
 
 <h2>Oportunidades</h2>
 
+<% unless @opportunities.count.zero? %>
+<table>
+<tr>
+  <th scope="col" abbr="Produto">Produto</th>  
+  <th scope="col" abbr="Valor">Valor</th>
+  <th scope="col" abbr="Valor">Status</th>
+  <th scope="col" abbr="Valor">Gerente</th>
+</tr>
 <% @opportunities.each do |opportunity| %>
-<table id="mytable" cellspacing="0" summary="Oportunidades">
-<caption>Criada em <%= opportunity.created_at %> por <%=h opportunity.creator %></caption>
 <tr>
-  <th scope="col" abbr="Produto"><%=h opportunity.product %></th>
-  <th scope="col" abbr="Opções">
-	    <%= link_to 'Detalhes', opportunity %> | 
-  	    <%= link_to 'Alterar', edit_opportunity_path(opportunity) %> | 
-	    <%= link_to 'Remover', opportunity, :confirm => 'Tem Certeza?', :method => :delete %>
-  </th>
+  <td><%= link_to opportunity.product, opportunity %></td>
+  <td>R$ <%=h opportunity.value %></td>
+  <td><%=h opportunity.opportunity_status %></td>
+  <td><%=h opportunity.manager %></td>
 </tr>
-<tr>
-  <th scope="row" class="specalt" abbr="Valor">Valor: R$ <%=h opportunity.value %></th>
-  <td>Atualmente em: <%=h opportunity.opportunity_status %></td>
-</tr>
-<tr>
-	<td>  	
-    </td>
-    <td>Gerenciada por: <%=h opportunity.manager %></td>
-</tr>
+<% end %>
 </table>
-
+<% else %>
+<p>Ainda não existem oportunidades associadas a essa conta.</p>
 <% end %>

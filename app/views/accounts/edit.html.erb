@@ -1,4 +1,11 @@
-<h1>Editing account</h1>
+<% content_for :shortcuts do %>
+<ul>
+<li><%= link_to 'Voltar para contas', home_path %></li>
+</ul>
+<% end %>
+
+
+<h1>Alterando Conta</h1>
 
 <% form_for(@account) do |f| %>
   <%= f.error_messages %>
@@ -20,8 +27,6 @@
 	<%= select :account, :manager_id, User.find(:all).collect{|u| [u.login, u.id] } %>
   </p>
   <p>
-    <%= f.submit 'Update' %>
+    <%= f.submit 'Salvar' %>
   </p>
 <% end %>
-
-<%= link_to 'Voltar para contas', home_path %>

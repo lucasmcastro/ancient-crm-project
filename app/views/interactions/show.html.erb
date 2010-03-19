@@ -8,29 +8,16 @@
 <% end %>
 <h2>Detalhes de Interação Comercial</h2>
 
-<table>
-  <tr>
-    <th>Relator</th>
-    <th>Tipo</th>
-    <th>Assunto</th>
-  </tr>
-  <tr>
-    <td><%=h @interaction.creator %></td>
-    <td><%=h @interaction.type %></td>
-    <td><%=h @interaction.subject %></td>
-  </tr>
-</table>
+<p>Tipo: <strong><%=h @interaction.type %></strong></p>
+<p>Assunto: <strong><%=h @interaction.subject %></strong></p>
 
-
-
-<h2>Notas associadas</h2>
+<br />
+<h2>Atualizações e Comentários</h2>
 <table>
   <tr>
     <th>Data</th>
-    <th>Relator</th>
-    <th>Mudanças na Oportunidade</th>	
-    <th>Título</th>
-    <th>Conteúdo</th>
+    <th>Atualizações</th>	
+    <th>Comentário</th>
   </tr>
 
 <% @notes.each do |note| %>
@@ -39,20 +26,10 @@
 </table>
 
 <div id="add_note" style="display:none">
-	<h2>Atualizar Problema</h2>
+	<h2>Atualizar Interação</h2>
 <% form_for([@interaction, Note.new]) do |f| %>
   <%= f.error_messages %>
 
-  <p>
-    <%= f.label :assunto %><br />
-    <%= f.text_field :subject %>
-  </p>
-  <p>
-    <%= f.label :conteúdo %><br />
-    <%= f.text_area :content %>
-  </p>
-
-  
   <p>
     <%= f.label :valor %><br />
     <%= text_field :opportunity, :value %>
@@ -69,6 +46,17 @@
     <%= f.label :gerente %><br />
     <%= select :opportunity, :manager_id, [["Nenhum",false]] + User.find(:all).collect{|u| [u.login, u.id] } %>
   </p>
+
+  <p>
+    <%= f.label :assunto %><br />
+    <%= f.text_field :subject %>
+  </p>
+  <p>
+    <%= f.label :conteúdo %><br />
+    <%= f.text_area :content %>
+  </p>
+
+  
 
   <p>
     <%= f.submit 'Atualizar' %>

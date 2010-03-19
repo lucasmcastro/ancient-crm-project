@@ -1,41 +1,26 @@
 <% content_for :shortcuts do %>
 <ul>
 	<li><%= link_to "Voltar para Oportunidade", @opportunity%></li>
-	<li><%= link_to_function("Atualizar Problema", "$('add_note').show()") %></li>
 	<li><%= link_to 'Remover Problema', @issue, :confirm => 'Are you sure?', :method => :delete %></li>
+	<li><%= link_to_function("Atualizar Problema", "$('add_note').show()") %></li>
 </ul>
 <% end %>
 
 <h2>Detalhes de Problema</h2>
 
-<table>
-  <tr>
-  	<th>Assunto</th>
-	<th>Conteúdo</th>
-    <th>Status</th>
-    <th>Data</th>
-    <th>Relator</th>
-    <th>Responsável</th>
-  </tr>
+  	<p><strong>Descrição:</strong></p>
+	<p><%=h @issue.subject %> <br /><%=h @issue.content %></p>
+	<p>Relatado em: <strong><%= @issue.created_at.strftime("%D as %H:%M") %></strong> por <%=h @issue.creator %></p>
+	<p>Status: <strong><%=h @issue.issue_status %></strong></p>
+    <p>Responsável: <strong><%=h @issue.responsible %></strong></p>
 
-  <tr>  	
-  	<td><%=h @issue.subject %></td>
-    <td><%=h @issue.content %></td>
-    <td><%=h @issue.issue_status %></td>
-    <td><%=h @issue.created_at.strftime("%D as %H:%M") %></td>
-    <td><%=h @issue.creator %></td>
-    <td><%=h @issue.responsible %></td>	
-  </tr>
-</table>
-
-<h2>Notas associadas</h2>
+<br />
+<h2>Atualizações e Comentários</h2>
 <table>
   <tr>
     <th>Data</th>
-    <th>Relator</th>
-    <th>Mudanças</th>	
-    <th>Título</th>
-    <th>Conteúdo</th>
+    <th>Atualizações</th>	
+    <th>Comentários</th>
   </tr>
 
 <% @notes.each do |note| %>
@@ -50,21 +35,21 @@
   <%= f.error_messages %>
 
   <p>
-    <%= f.label :assunto %><br />
-    <%= f.text_field :subject %>
-  </p>
-  <p>
-    <%= f.label :conteúdo %><br />
-    <%= f.text_area :content %>
-  </p>
-
-  <p>
     <%= f.label :status %><br />
     <%= select :issue, :issue_status_id, IssueStatus.find(:all).collect{|s| [s.name, s.id] } %>
   </p>
   <p>
     <%= f.label :responsável %><br />
     <%= select :issue, :responsible_id, User.find(:all).collect{|u| [u.login, u.id] } %>
+  </p>
+
+  <p>
+    <%= f.label :assunto %><br />
+    <%= f.text_field :subject %>
+  </p>
+  <p>
+    <%= f.label :conteúdo %><br />
+    <%= f.text_area :content %>
   </p>
 
   <p>

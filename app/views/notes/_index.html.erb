@@ -1,6 +1,5 @@
   <tr>
-    <td><%=h note.created_at.strftime("%D as %H:%M") %></td>
-    <td><%=h note.creator %></td>
+    <td><%=h "#{note.created_at.strftime("%D as %H:%M")} por #{note.creator}" %></td>
   	<td>
 	  <% if note.versionable_version and not note.versionable_version.zero? %>
 		<% note.versionable.important_changes(note.versionable_version).each do |k,v| %>
@@ -11,8 +10,8 @@
 	  <% end %>
 
 	</td>
-    <td><%=h note.subject %></td>
-    <td><%=h note.content %></td>
+    <td><p><strong><%=h note.subject %></strong></p>
+	<p><%=h note.content %></p></td>
     <td><%= link_to 'Alterar', edit_note_path(note) %></td>
     <td><%= link_to 'Remover', note, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
