@@ -1,4 +1,6 @@
 <% content_for :javascript do %>
+  <%= javascript_include_tag "/date-picker-v5/js/datepicker.js" %>
+
   <script type="text/javascript">
   	function clearforms() 
 	{
@@ -7,6 +9,9 @@
 		$('add_link').show();
 	}
   </script>
+<% end %>
+<% content_for :stylesheet do %>
+  <%= stylesheet_link_tag '/date-picker-v5/css/datepicker.css' %>
 <% end %>
 
 <h1>Nova Interação Comercial</h1>
@@ -27,6 +32,24 @@
 <% form_for([:opportunity, @interaction]) do |f| %>
   <%= f.error_messages %>
 
+  <p>
+    <%= f.label :date %><br />
+  	<%= f.text_field :scheduled_date %>
+  </p>
+  <script type="text/javascript">
+      // <![CDATA[       
+        var opts = {     
+                // Attach input with an id of "dp-1" and give it a "d-sl-m-sl-Y" date format (e.g. 13/03/1990)                        
+                formElements:{"interaction_scheduled_date":"d-sl-m-sl-Y"}                  
+        };        
+        datePickerController.createDatePicker(opts);
+      // ]]>
+  </script>
+
+  <p>
+    <%= f.label :hora %><br />
+  	<%= f.text_field :scheduled_time %>
+  </p>
   <p>
     <%= f.label :tipo %><br />
   	<%= select :interaction, :type_id, InteractionType.find(:all).collect { |it| [it.name, it.id] }%>
