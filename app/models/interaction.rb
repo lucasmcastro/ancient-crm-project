@@ -7,7 +7,11 @@ class Interaction < ActiveRecord::Base
   has_many :notes, :as => :commentable
   
   # Atributos acessíveis para 'mass-assignment'
-  attr_accessible :type_id, :subject, :content, :scheduled_time, :scheduled_date
+  # Nota:
+  # scheduled_date não está nessa lista pois deve ser manipulado
+  # antes de enviado para o banco de dados, pois o banco de dados
+  # só aceita o formato americano
+  attr_accessible :type_id, :subject, :content, :scheduled_time
   
   # Atributos obrigatórios
   validates_presence_of :scheduled_date
@@ -22,8 +26,8 @@ class Interaction < ActiveRecord::Base
   validates_associated :type
   
   # Verificar formato dos atributos
-  date_regexp = /(0?[1-9]|[12][0-9]|3[01])[-\/.](0?[1-9]|1[012])[-\/.](19|20)?[0-9]{2}\b/
-  time_regexp = /(0?[1-9]|1[0-9]|2[0-3]):(0?[1-9]|[1-5][0-9])/
+  date_regexp = /(0[1-9]|[12][0-9]|3[01])[-\/.](0?[1-9]|1[012])[-\/.](19|20)?[0-9]{2}/
+  time_regexp = /(0[1-9]|1[0-9]|2[0-3]):(0?[1-9]|[1-5][0-9])/
   validates_format_of :scheduled_date, :with => date_regexp, :message => "utiliza formato dd/mm/aaaa"
   validates_format_of :scheduled_time, :with => time_regexp, :message => "utiliza formado hh/mm", :unless => :scheduled_time_is_blank?
 
@@ -31,4 +35,5 @@ class Interaction < ActiveRecord::Base
   def scheduled_time_is_blank?
     self.scheduled_time.blank?
   end
+
 end

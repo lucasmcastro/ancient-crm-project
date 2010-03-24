@@ -49,9 +49,11 @@ class InteractionsController < ApplicationController
   def create
     @opportunity = Opportunity.find(params[:opportunity_id])
     @interaction = Interaction.new(params[:interaction])
+    br_scheduled_date = params[:interaction][:scheduled_date] 
+    @interaction.scheduled_date = Date.strptime(br_scheduled_date,'%d/%m/%Y')
     @interaction.creator = current_user
     @interaction.opportunity = @opportunity 
-
+    
     respond_to do |format|
       if @interaction.save
         flash[:notice] = 'Interação foi cadastrada com sucesso.'
