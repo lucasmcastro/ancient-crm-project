@@ -9,8 +9,6 @@ class Note < ActiveRecord::Base
   # Atributos obrigatórios
   validates_presence_of :creator_id
   validates_presence_of :commentable_id
-  validates_presence_of :subject
-  validates_presence_of :content
   
   # Verificar consistência dos objetos relacionados
   validates_associated :creator
