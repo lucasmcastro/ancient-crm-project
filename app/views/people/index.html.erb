@@ -1,8 +1,13 @@
+<% content_for :title do %>
+Todas as Pessoas
+<% end %>
+<% content_for :back do %>
+<ul><li><%= link_to 'Voltar para contas', accounts_url %></li></ul>
+<% end %>
 <% content_for :shortcuts do %>
 <ul>
-<li><%= link_to 'Adicionar Pessoa', new_account_path %></li>
+<li><%= link_to 'Adicionar Pessoa', new_person_path %></li>
 </ul>
-
 <% end %>
 
 <h2>Todas as Pessoas</h2>
