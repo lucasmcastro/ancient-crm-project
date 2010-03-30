@@ -2,7 +2,6 @@ class OpportunitiesController < ApplicationController
   # GET /opportunities
   # GET /opportunities.xml
   def index
-    @account = Account.find(params[:account_id])
     @opportunities = Opportunity.all
 
     respond_to do |format|
