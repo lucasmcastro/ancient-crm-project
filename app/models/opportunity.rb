@@ -50,4 +50,12 @@ class Opportunity < ActiveRecord::Base
         attribute_name
     end
   end
+  
+  def to_s
+    self.product.to_s
+  end
+  
+  def to_param
+    "#{self.id}-#{self.product.to_s.gsub(/[^a-z0-9]+/i, '-')}-para-#{self.account.name.gsub(/[^a-z0-9]+/i, '-')}"
+  end  
 end

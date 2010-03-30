@@ -1,3 +1,11 @@
+<% content_for :title do %>
+<%=h @account.name %> 
+<% end %>
+<% content_for :back do %>
+<ul>
+	<li><%= link_to "Voltar para contas", accounts_url %></li>
+</ul>
+<% end %>
 <% content_for :shortcuts do %>
 <ul>
 	<li><%= link_to "Alterar Conta", edit_account_url(@account) %></li>

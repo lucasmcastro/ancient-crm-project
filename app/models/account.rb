@@ -70,6 +70,11 @@ class Account < ActiveRecord::Base
   def to_s
     "#{self.name}"
   end
+  
+  def to_param
+    "#{self.id}-#{self.name.gsub(/[^a-z0-9]+/i, '-')}"
+  end
+
 
 # Adicionar noção de última interação, me fez pensar melhor na minha modelagem
 # e decidi que preciso pensar mais antes de adicionar essa noção.

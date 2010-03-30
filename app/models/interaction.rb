@@ -35,4 +35,8 @@ class Interaction < ActiveRecord::Base
   def scheduled_time_is_blank?
     self.scheduled_time.blank?
   end
+  
+  def to_param
+    "#{self.id}-#{self.subject.gsub(/[^a-z0-9]+/i, '-')}-em-#{self.opportunity.product.to_s.gsub(/[^a-z0-9]+/i, '-')}-para-#{self.opportunity.account.name.gsub(/[^a-z0-9]+/i, '-')}"
+  end    
 end

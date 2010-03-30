@@ -1,21 +1,27 @@
-<% content_for :shortcuts do %>
+<% content_for :title do %>
+<%=h @account.name %> > <%=h @opportunity.product %> 
+<% end %>
+<% content_for :back do %>
 <ul>
 	<li><%= link_to 'Voltar para conta', @account %></li>
+</ul>
+<% end %>
+<% content_for :shortcuts do %>
+<ul>
   	<li><%= link_to 'Alterar Oportunidade', edit_opportunity_path(@opportunity) %></li> 
 	<li><%= link_to 'Remover Oportunidade', @opportunity, :confirm => 'Tem Certeza?', :method => :delete %></li>
-	<li><%= link_to 'Nova Interação Comercial', new_opportunity_interaction_path(@opportunity)%></li>
-	<li><%= link_to 'Nova Interação Técnica', new_opportunity_issue_path(@opportunity)%></li>
+	<li><%= link_to 'Agendar Atividade', new_opportunity_interaction_path(@opportunity)%></li>
 </ul>
 <% end %>
 
-<h2> Detalhes de Oportunidade</h2>
+<h2> Detalhes de Oportunidade para <%=h @account.name %></h2>
 
   <p>Produto: <strong><%=h @opportunity.product %></th></strong></p>
   <p>Valor: <strong>R$ <%=h @opportunity.value %></strong></p>
   <p>Status: <strong><%=h @opportunity.opportunity_status %></strong></p>
   <p>Gerente: <strong><%=h @opportunity.manager %></strong></p>
 
-<h2>Interações Comerciais</h2>
+<h2>Atividades Agendadas</h2>
 
 <% @interactions.each do |interaction| %>
 
@@ -29,13 +35,10 @@
   </tr>
 
   <tr>
-    <td><%=h interaction.subject %></td>
+	<td><%= link_to interaction.subject, interaction %></td>
     <td><%=h interaction.type %></td>
     <td><%=h interaction.creator %></td>
     <td><%=h interaction.notes.count %></td>
-    <td><%= link_to 'Detalhes', interaction %></td>
-    <td><%= link_to 'Alterar', edit_interaction_path(interaction) %></td>
-    <td><%= link_to 'Remover', interaction, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 </table>
   <% if interaction.notes.count > 0 %>
@@ -56,8 +59,8 @@
 <% end %>
 
 
-
-<h2>Interações Técnicas</h2>
+<!--
+<h2>Problemas Relatados</h2>
 
 <table>
   <tr>
@@ -83,3 +86,4 @@
   </tr>
 <% end %>
 </table>
+-->

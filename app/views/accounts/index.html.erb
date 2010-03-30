@@ -16,16 +16,13 @@
 
 <% @accounts.each do |account| %>
   <tr>
-    <td><%=h account.name %> ( <%= account.opportunities.count %> )</td>
+    <td><%= link_to account.name, account %> ( <%= account.opportunities.count %> )</td>
     <td><%=h account.cnpj %> </td>
     <td><%=h account.legal_name %> </td>
     <td>R$ <%= account.opportunities.sum(:value) %></td>
     <td><%= account.interactions_sum %></td>
     <td><%= account.open_issues_sum %>/<%= account.issues_sum %></td>
     <td><%= link_to 'Nova Oportunidade', new_account_opportunity_path(account) %></td>	
-    <td><%= link_to 'Detalhes', account %></td>
-    <td><%= link_to 'Alterar', edit_account_path(account) %></td>
-    <td><%= link_to 'Remover', account, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 <% end %>
 </table>
