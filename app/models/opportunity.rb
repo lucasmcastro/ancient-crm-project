@@ -51,6 +51,10 @@ class Opportunity < ActiveRecord::Base
     end
   end
   
+  def formated_value
+    "%.2f" % self.value
+  end
+  
   def to_s
     self.product.to_s
   end

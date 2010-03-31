@@ -131,7 +131,7 @@
 <% @opportunities.each do |opportunity| %>
 <tr>
   <td><%= link_to opportunity.product, opportunity %></td>
-  <td>R$ <%=h opportunity.value %></td>
+  <td>R$ <%=h opportunity.formated_value %></td>
   <td><%=h opportunity.opportunity_status %></td>
   <td><%=h opportunity.manager %></td>
 </tr>
