@@ -1,3 +1,10 @@
+<% content_for :title do %>
+Novo relacionamento para: <%= @person %>
+<% end %>
+<% content_for :back do %>
+<ul><li><%= link_to 'Voltar', @person %></li></ul>
+<% end %>
+
 <h3>Novo relacionamento para: <%= @person %></h3>
 
 <% form_for([@person, @link]) do |f| %>
@@ -30,5 +37,3 @@
     <%= f.submit 'Adicionar' %>
   </p>
 <% end %>
-
-<%= link_to 'Cancelar', @person %>

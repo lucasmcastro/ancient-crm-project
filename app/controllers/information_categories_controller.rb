@@ -44,7 +44,8 @@ class InformationCategoriesController < ApplicationController
 
     respond_to do |format|
       if @information_category.save
-        flash[:notice] = 'InformationCategory was successfully created.'
+        flash[:notice] = 'Categoria foi inserida com sucesso.'
+        format.js {  render :partial => 'category_select', :object => @information_category }
         format.html { redirect_to(information_categories_url) }
         format.xml  { render :xml => @information_category, :status => :created, :location => information_categories_url }
       else

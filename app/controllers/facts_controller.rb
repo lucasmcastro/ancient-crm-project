@@ -5,6 +5,7 @@ class FactsController < ApplicationController
     @fact = Fact.new
     @informable = find_informable(params) 
     @categories = InformationCategory.find_all_by_category_type(@informable.class.name)
+    @information_category = InformationCategory.new
     
     respond_to do |format|
       format.html # new.html.erb
@@ -72,6 +73,7 @@ class FactsController < ApplicationController
   
   def find_informable(params)
     informable = Account.find(params[:account_id]) if params.has_key? :account_id
+    informable = Person.find(params[:person_id]) if params.has_key? :person_id    
     return informable
   end
 end

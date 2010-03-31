@@ -1,4 +1,55 @@
-<h3>Adicionar informação</h3>
+<% content_for :javascript do %>
+  <script type="text/javascript">
+  	function clearforms()
+	{
+		$("information_category_name").clear();
+		$("information_category_data_type").clear();
+		$('add_category').hide();
+		$('add_link').show();
+	}
+  </script>
+<% end %>
+<% content_for :title do %>
+Adicionar Informação sobre <%=h @informable %>
+<% end %>
+<% content_for :back do %>
+<ul><li><%= link_to 'Voltar', @informable %></li></ul>
+<% end %>
+
+
+<p id="add_link"><%= link_to_function("Adicionar Categoria", "$('add_link').hide(); $('add_category').show()")%></p>
+
+
+<div id="add_category" style="display:none;">
+<h3>Categoria de Informação</h3>
+
+ 
+  <% form_remote_for @information_category, :update => "fact_information_category_id", :position => :bottom, :html => {:id => 'category_form'}, :complete => "clearforms()" do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :nome %><br />
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.label :tipo_do_objeto %><br />
+    <%= text_field :aux, :category_type_human, {:value => @informable.classe, :disabled => true } %>
+    <%= f.hidden_field :category_type, { :value => @informable.class.name } %>
+  </p>
+  <p>
+    <%= f.label :tipo_de_dados %><br />
+    <%= select :information_category, :data_type, options_for_select(@information_category.datatype_choices) %>
+  </p>
+  <p>
+    <%= f.submit 'Salvar' %> | 
+	<%= link_to_function("Cancelar", "$('add_category').hide(); $('add_link').show()")%>
+  </p>
+<% end %>
+<hr />
+</div>
+
+
+<h3>Adicionar informação sobre <%=h @informable %></h3>
 
 <% form_for([@informable, @fact]) do |f| %>
   <%= f.error_messages %>
@@ -15,5 +66,3 @@
     <%= f.submit 'Adicionar' %>
   </p>
 <% end %>
-
-<%= link_to 'Cancelar', @informable %>

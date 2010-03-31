@@ -51,6 +51,9 @@ class Account < ActiveRecord::Base
   end
 
   # Definições
+  def classe
+    'Conta'
+  end
   def interactions_sum
     (Account.interactions self.id).count
   end

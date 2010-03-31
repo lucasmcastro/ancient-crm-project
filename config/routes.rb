@@ -19,8 +19,8 @@ ActionController::Routing::Routes.draw do |map|
   # Rotas aninhadas
   map.resources :accounts, :shallow => true, :except => ["index"] do |accounts|
     accounts.resource :address
-    accounts.resources :facts, :except => ["show", "index"]
-    accounts.resources :phones, :except => ["show", "index"]
+    accounts.resources :facts, :except => ['index', 'show']
+    accounts.resources :phones, :except => ['index', 'show']
     accounts.resources :opportunities do |opportunities|
       opportunities.resources :interactions do |interactions|
         interactions.resources  :notes
@@ -32,6 +32,7 @@ ActionController::Routing::Routes.draw do |map|
   end
 
   map.resources :people, :shallow => true do |people|
+    people.resources :facts, :except => ['index', 'show']
     people.resources :links, :except => ['index', 'show']
     people.resources :contact_forms, :except => ['index', 'show'] do |contact_forms|
       contact_forms.resource :contact_type
