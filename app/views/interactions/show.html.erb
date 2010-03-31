@@ -16,7 +16,7 @@
 <h2>Detalhes de <%=h @interaction.subject %> em <%=h @opportunity %> para <%=h @account %></h2>
 
 <p>Data: <strong><%=h @interaction.scheduled_date %></strong></p>
-<p>Hora: <strong><%=h @interaction.scheduled_time %></strong></p>
+<p>Hora: <strong><%=h @interaction.scheduled_time.strftime("%H:%m") %></strong></p>
 <p>Tipo: <strong><%=h @interaction.type %></strong></p>
 <p>Assunto: <strong><%=h @interaction.subject %></strong></p>
 <p>Objetivos: <%= @interaction.content.to_html %></p>
