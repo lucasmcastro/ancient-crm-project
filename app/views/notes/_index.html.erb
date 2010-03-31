@@ -1,19 +1,21 @@
-  <tr>
-    <td><%=h "#{note.created_at.strftime("%D as %H:%M")} por #{note.creator}" %></td>
-  	<td>
-	  <% if note.versionable_version and not note.versionable_version.zero? %>
-		<% note.versionable.important_changes(note.versionable_version).each do |k,v| %>
-	    <p><%= "#{k} mudou de '#{v[0]}' para '#{v[1]}'" %></p>
-		<% end %>
-	  <% else %>
-		<p>-</p>
-	  <% end %>
+  <div class="text_block">
+  <div class="block_title">
+  	<span class="timestamp"><%=h "#{note.created_at.strftime("%D as %H:%M")} por #{note.creator}" %> <%= link_to 'alterar', edit_note_path(note) %> | <%= link_to 'remover', note, :confirm => 'Are you sure?', :method => :delete %></span>
 
-	</td>
-    <td><p><strong><%=h note.subject %></strong></p>
-	<p><%=h note.content %></p></td>
-    <td><%= link_to 'Alterar', edit_note_path(note) %></td>
-    <td><%= link_to 'Remover', note, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
+  	<span class="title_text"><strong><%=h note.subject %></strong></span>
+  <br class="clear" />
+  </div>
+  
+  <% if note.versionable_version and not note.versionable_version.zero? %>
+	<ul>
+	<% note.versionable.important_changes(note.versionable_version).each do |k,v| %>
+      <li><%= "#{k} mudou de <strong>'#{v[0]}'</strong> para <strong>'#{v[1]}'</strong>" %></li>
+	<% end %>
+    </ul>
+	<% end %>
 
-
+	<div class="block_content">
+	  <%= note.content.to_html %>	
+	</div>
+    
+  </div>

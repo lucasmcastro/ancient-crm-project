@@ -17,7 +17,34 @@ pre {
   background-color: red;
   display: table;
 }
+.text_block {
+  padding: 5px;
+  width: 50%;
+  border: 1px solid #CCC
+}
 
+.block_title{
+  border-bottom: 1px solid #DDD;
+  padding-bottom: 5px;
+}
+
+.block_content{
+  padding-left: 30px;	
+
+}
+.title_text {
+  font-size: 13px;
+  font-weight: strong;
+
+}
+.timestamp{
+  float:right;
+  font-size: 10px;	
+}
+
+.clear{
+	clear: both;
+}
 #errorExplanation {
   width: 400px;
   border: 2px solid red;

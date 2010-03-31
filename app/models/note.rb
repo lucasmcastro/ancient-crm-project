@@ -1,4 +1,7 @@
 class Note < ActiveRecord::Base
+  # Comportamentos
+  acts_as_markup :language => :markdown, :columns => [:content]
+
   # Relacionamentos
   belongs_to :creator, :class_name => 'User'
   belongs_to :commentable, :polymorphic => true

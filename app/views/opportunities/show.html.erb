@@ -25,37 +25,31 @@
 
 <% @interactions.each do |interaction| %>
 
-<p>Interação: </p>
 <table>
   <tr>
+	<th>Data</th>	
     <th>Assunto</th>
+    <th>Objetivos</th>
     <th>Tipo</th>
     <th>Relator</th>
 	<th>Notas</th>
   </tr>
 
   <tr>
+    <td><%=h interaction.scheduled_date %></td>	
 	<td><%= link_to interaction.subject, interaction %></td>
+    <td><%=h interaction.content %></td>
     <td><%=h interaction.type %></td>
     <td><%=h interaction.creator %></td>
     <td><%=h interaction.notes.count %></td>
   </tr>
 </table>
   <% if interaction.notes.count > 0 %>
-  <p>Comentários:</p>
-<table>
-  <tr>
-    <th>Data</th>
-    <th>Mudanças na Oportunidade</th>	
-    <th>Comentário</th>
-  </tr>
-
-<% interaction.notes.each do |note| %>
-  <%= render :partial => 'notes/index', :locals => {:note => note} %>
-<% end %>
-</table>
-<% end %>
- 
+  <p>Histórico:</p>
+  <% interaction.notes.each do |note| %>
+    <%= render :partial => 'notes/index', :locals => {:note => note} %>
+  <% end %>
+  <% end %>
 <% end %>
 
 
