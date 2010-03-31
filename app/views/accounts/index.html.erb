@@ -16,7 +16,15 @@
 
 <% @accounts.each do |account| %>
   <tr>
-    <td><%= link_to account.name, account %> ( <%= account.opportunities.count %> )</td>
+    <td><%= link_to account.name, account %> ( <%= account.opportunities.count %> ) <%= link_to_function("^", "$('show_link_%s').hide();$('submenu_%s').show();$('hide_link_%s').show();" % [account.id, account.id, account.id], {'id'=>'show_link_%s' % account.id })%> <%= link_to_function("v", "$('show_link_%s').show();$('submenu_%s').hide();$('hide_link_%s').hide();" % [account.id, account.id, account.id] , {'id'=>'hide_link_%s' % account.id, 'style'=>"display:none"})%>
+      <ul id="submenu_<%= account.id %>" class="submenu wbadges" style="display:none">
+      	<% account.opportunities.each do |opportunity| %>
+        <li class="bin shared">
+          <%= link_to opportunity, opportunity%>
+        </li>
+		<% end %>
+      </ul>
+    </td>
     <td><%=h account.cnpj %> </td>
     <td><%=h account.legal_name %> </td>
     <td>R$ <%= "%.2f" % account.opportunities.sum(:value) %></td>
