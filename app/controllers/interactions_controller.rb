@@ -49,8 +49,9 @@ class InteractionsController < ApplicationController
   def create
     @opportunity = Opportunity.find(params[:opportunity_id])
     @interaction = Interaction.new(params[:interaction])
+    @account = @opportunity.account
     br_scheduled_date = params[:interaction][:scheduled_date] 
-    @interaction.scheduled_date = Date.strptime(br_scheduled_date,'%d/%m/%Y')
+    @interaction.scheduled_date = Date.strptime(br_scheduled_date,'%d/%m/%Y') unless br_scheduled_date.blank?
     @interaction.creator = current_user
     @interaction.opportunity = @opportunity 
     
