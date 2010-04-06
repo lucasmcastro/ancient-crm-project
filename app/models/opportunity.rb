@@ -10,7 +10,7 @@ class Opportunity < ActiveRecord::Base
   belongs_to :product
   belongs_to :opportunity_status
   
-  has_many :interactions
+  has_many :interactions, :order => 'scheduled_date DESC'
   has_many :issues
   
   # Atributos acessíveis para "mass-assignment"

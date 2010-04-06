@@ -7,7 +7,7 @@ class Interaction < ActiveRecord::Base
   belongs_to :type, :class_name => 'InteractionType'
   belongs_to :opportunity
 
-  has_many :notes, :as => :commentable
+  has_many :notes, :as => :commentable, :order => 'created_at DESC'
   
   # Atributos acessíveis para 'mass-assignment'
   # Nota:
