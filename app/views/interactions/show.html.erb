@@ -35,6 +35,7 @@
 <% form_for([@interaction, Note.new]) do |f| %>
   <%= f.error_messages %>
 
+  <%= hidden_field :aux, :versionable_version, :value => @opportunity.version %>
   <p>
     <%= f.label :valor %><br />
     <%= text_field :opportunity, :value %>

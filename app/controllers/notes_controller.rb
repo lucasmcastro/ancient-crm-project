@@ -25,9 +25,11 @@ class NotesController < ApplicationController
     @note.commentable = @commentable
     @versionable = @note.versionable
 
+
     versionable_key = @versionable.class.class_name.downcase.to_sym
-    @versionable.update_attributes(params[versionable_key]) if params.has_key? versionable_key
-    @note.versionable_version = @versionable.version if (@note.valid? and @versionable.respond_to? :version)
+    aux_version = params[:aux][:versionable_version].to_i if params.has_key? :aux
+    @versionable.update_attributes(params[versionable_key]) if @versionable and params.has_key? versionable_key
+    @note.versionable_version = @versionable.version if (@note.valid? and @versionable.respond_to? :version and @versionable.version != aux_version) 
     
     respond_to do |format|
       if @note.save
