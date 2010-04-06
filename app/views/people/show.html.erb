@@ -62,7 +62,7 @@
   <tr>
     <td><%=h link.friendly_link_type %></td>
     <td><%=h link.complement %></td>
-    <td><%=h link.linkable %></td>
+    <td><%= link_to link.linkable, link.linkable %></td>
     <td><%= link_to 'Alterar', edit_link_path(link) %></td>
     <td><%= link_to 'Remover', link, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
