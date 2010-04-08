@@ -48,32 +48,35 @@
 <p>Ainda não existem formas de contato. (<%= link_to "Adicionar", new_person_contact_form_path(@person) %>) </p>
 <% end %>
 
-<h3>Relacionamentos Diretos</h3>
+<h3>Relacionamentos com Contas</h3>
 
-<% unless @person.direct_links.count.zero? %>
+<% unless @person.account_links.count.zero? %>
 <table>
   <tr>
+    <th>Conta</th>
     <th>Tipo</th>
     <th>Complemento</th>
-    <th>Relacionado</th>
   </tr>
 
-<% @person.direct_links.each do |link| %>
-  <tr>
+<% @person.account_links.each do |link| %>
+  <tr>  	
+    <td><%= link_to link.linkable, link.linkable %></td>
     <td><%=h link.friendly_link_type %></td>
     <td><%=h link.complement %></td>
-    <td><%= link_to link.linkable, link.linkable %></td>
     <td><%= link_to 'Alterar', edit_link_path(link) %></td>
     <td><%= link_to 'Remover', link, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 <% end %>
 </table>
 <% else %>
-<p>Ainda não existem relacionamentos diretos. (<%= link_to "Adicionar", new_person_link_path(@person) %>)</p>
+<p>Ainda não existem relacionamentos com contas. (<%= link_to "Adicionar", new_person_link_path(@person) %>)</p>
 <% end %>
-<h3>Relacionamentos Reversos</h3>
 
-<% unless @person.reverse_links.count.zero? %>
+
+<h3>Relacionamentos com Pessoas</h3>
+
+
+<% unless @person.direct_links.count.zero? and @person.reverse_links.count.zero? %>
 <table>
   <tr>
     <th>Pessoa</th>
@@ -81,9 +84,18 @@
     <th>Complemento</th>
   </tr>
 
-<% @person.reverse_links.each do |link| %>
+<% @person.direct_links.each do |link| %>
   <tr>
-    <td><%=h link.person %></td>
+    <td><%= link_to link.linkable, link.linkable %></td>
+    <td><%=h link.friendly_link_type %></td>
+    <td><%=h link.complement %></td>
+    <td><%= link_to 'Alterar', edit_link_path(link) %></td>
+    <td><%= link_to 'Remover', link, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+<% @person.reverse_links.each do |link| %>
+  <tr>  	
+    <td><%= link_to link.person, link.person %></td>
     <td><%=h link.friendly_link_type %></td>
     <td><%=h link.complement %></td>
     <td><%= link_to 'Alterar', edit_link_path(link) %></td>
@@ -92,8 +104,9 @@
 <% end %>
 </table>
 <% else %>
-<p>Ainda não existem relacionamentos reversos. </p>
+<p>Ainda não existem relacionamentos com pessoas. (<%= link_to "Adicionar", new_person_link_path(@person) %>)</p>
 <% end %>
+
 
 <h3>Informações</h3>
 

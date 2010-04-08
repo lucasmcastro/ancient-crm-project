@@ -66,8 +66,8 @@ class Account < ActiveRecord::Base
     Account.open_issues(self.id).count
   end
   
-  def links
-    Link.account_links self.id
+  def person_links
+    Link.account_person_links self.id
   end
   
   def to_s

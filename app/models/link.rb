@@ -20,19 +20,29 @@ class Link < ActiveRecord::Base
   validates_associated :linkable
   
   # Filtros
-  named_filter(:account_links) do |account_id|
+  named_filter(:account_person_links) do |account_id|
     with(:linkable_id, account_id)
     with(:linkable_type, 'Account')
   end
   
-  named_filter(:person_links) do |person_id|
+  named_filter(:person_direct_links) do |person_id|
+    with(:person_id, person_id)
+    with(:linkable_type, 'Person')
+  end
+
+  named_filter(:person_reverse_links) do |person_id|
     with(:linkable_id, person_id)
     with(:linkable_type, 'Person')
   end
 
+  named_filter(:person_account_links) do |person_id|
+    with(:person_id, person_id)
+    with(:linkable_type, 'Account')
+  end
+
   # Definições
   def to_s
-    "#{self.link.type}: #{self.person} => #{self.complement} => #{self.linkable}"
+    "#{self.person} => #{self.complement} => #{self.linkable}"
   end
   
   def linktype_choices_for_person

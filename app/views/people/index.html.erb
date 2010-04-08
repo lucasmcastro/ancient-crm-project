@@ -16,15 +16,14 @@ Todas as Pessoas
   <tr>
     <th>Nome</th>	
     <th>Sobrenome</th>
+	<th>Info. Adicionais</th>
   </tr>
 
 <% @people.each do |person| %>
   <tr>
-    <td><%=h person.forename %></td>
+    <td><%= link_to person.forename, person %></td>
     <td><%=h person.surname %> </td>
-    <td><%= link_to 'Detalhes', person %></td>
-    <td><%= link_to 'Alterar', edit_person_path(person) %></td>
-    <td><%= link_to 'Remover', person, :confirm => 'Are you sure?', :method => :delete %></td>
+	<td><%= person.aditional_info %></td>
   </tr>
 <% end %>
 </table>

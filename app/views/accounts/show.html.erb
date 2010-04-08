@@ -94,7 +94,7 @@
 
 <h2>Pessoas</h2>
 
-<% unless @account.links.count.zero? %>
+<% unless @account.person_links.count.zero? %>
 <table>
   <tr>
   	<th>Nome</th>
@@ -102,7 +102,7 @@
     <th>Complemento</th>
   </tr>
 
-<% @account.links.each do |link| %>
+<% @account.person_links.each do |link| %>
   <tr>
     <td><%= link_to link.person, link.person %></td>
     <td><%=h link.friendly_link_type %></td>
