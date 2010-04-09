@@ -46,50 +46,28 @@
   <% end %>
 </p>
 
-<h2>Telefones para Contato</h2>
-<% unless @account.phones.count.zero? %>
+
+<h2>Oportunidades</h2>
+
+<% unless @opportunities.count.zero? %>
 <table>
-  <tr>
-    <th>Número</th>
-	<th>Descrição</th>
-    <th>Operadora</th>
-    <th>Tipo</th>
-  </tr>
-
-  <% @account.phones.each do |phone| %>
-  <tr>
-    <td><%=h phone.number %></td>
-    <td><%=h phone.description %></td>
-    <td><%=h phone.company %></td>
-    <td><%=h phone.phone_type %></td>
-    <td><%= link_to 'Alterar', edit_phone_path(phone) %></td>
-    <td><%= link_to 'Remover', phone, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>	
-  <% end %>
-</table>
-<% else %>
-<p>Ainda não existem telefones cadastrados. (<%= link_to "Cadastrar", new_account_phone_url(@account) %>)</p>
-<% end %>
-<h2>Informações</h2>
-
-<% unless @facts.count.zero? %>
-<table>
-  <tr>
-    <th>Tipo</th>
-    <th>Valor</th>
-  </tr>
-
-<% @facts.each do |fact| %>
-  <tr>
-    <td><%=h fact.information_category.name %></td>
-    <td><%=h fact.content %></td>
-    <td><%= link_to 'Alterar', edit_fact_path(fact) %></td>
-    <td><%= link_to 'Remover', fact, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
+<tr>
+  <th scope="col" abbr="Produto">Produto</th>  
+  <th scope="col" abbr="Valor">Valor</th>
+  <th scope="col" abbr="Valor">Status</th>
+  <th scope="col" abbr="Valor">Gerente</th>
+</tr>
+<% @opportunities.each do |opportunity| %>
+<tr>
+  <td><%= link_to opportunity.product, opportunity %></td>
+  <td>R$ <%=h opportunity.formated_value %></td>
+  <td><%=h opportunity.opportunity_status %></td>
+  <td><%=h opportunity.manager %></td>
+</tr>
 <% end %>
 </table>
 <% else %>
-<p>Ainda não existem informações associadas a essa conta. (<%= link_to "Adicionar", new_account_fact_url(@account) %>)</p>
+<p>Ainda não existem oportunidades associadas a essa conta.</p>
 <% end %>
 
 <h2>Pessoas</h2>
@@ -114,27 +92,51 @@
 <p>Ainda não existem pessoas associadas a essa conta.</p>
 <% end %>
 
+<h2>Informações</h2>
 
-
-<h2>Oportunidades</h2>
-
-<% unless @opportunities.count.zero? %>
+<% unless @facts.count.zero? %>
 <table>
-<tr>
-  <th scope="col" abbr="Produto">Produto</th>  
-  <th scope="col" abbr="Valor">Valor</th>
-  <th scope="col" abbr="Valor">Status</th>
-  <th scope="col" abbr="Valor">Gerente</th>
-</tr>
-<% @opportunities.each do |opportunity| %>
-<tr>
-  <td><%= link_to opportunity.product, opportunity %></td>
-  <td>R$ <%=h opportunity.formated_value %></td>
-  <td><%=h opportunity.opportunity_status %></td>
-  <td><%=h opportunity.manager %></td>
-</tr>
+  <tr>
+    <th>Tipo</th>
+    <th>Valor</th>
+  </tr>
+
+<% @facts.each do |fact| %>
+  <tr>
+    <td><%=h fact.information_category.name %></td>
+    <td><%=h fact.content %></td>
+    <td><%= link_to 'Alterar', edit_fact_path(fact) %></td>
+    <td><%= link_to 'Remover', fact, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
 <% end %>
 </table>
 <% else %>
-<p>Ainda não existem oportunidades associadas a essa conta.</p>
+<p>Ainda não existem informações associadas a essa conta. (<%= link_to "Adicionar", new_account_fact_url(@account) %>)</p>
 <% end %>
+
+<h2>Telefones para Contato</h2>
+<% unless @account.phones.count.zero? %>
+<table>
+  <tr>
+    <th>Número</th>
+	<th>Descrição</th>
+    <th>Operadora</th>
+    <th>Tipo</th>
+  </tr>
+
+  <% @account.phones.each do |phone| %>
+  <tr>
+    <td><%=h phone.number %></td>
+    <td><%=h phone.description %></td>
+    <td><%=h phone.company %></td>
+    <td><%=h phone.phone_type %></td>
+    <td><%= link_to 'Alterar', edit_phone_path(phone) %></td>
+    <td><%= link_to 'Remover', phone, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>	
+  <% end %>
+</table>
+<% else %>
+<p>Ainda não existem telefones cadastrados. (<%= link_to "Cadastrar", new_account_phone_url(@account) %>)</p>
+<% end %>
+
+
