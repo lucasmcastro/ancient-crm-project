@@ -1,4 +1,12 @@
-<h1>Alterando Telefone</h1>
+<% content_for :title do %>
+<%=h @callable %> > Alterando telefone 
+<% end %>
+
+<% content_for :back do %>
+<ul><li><%= link_to 'Voltar', @callable %></li></ul>
+<% end %>
+
+<h1>Alterando Telefone para <%=h @callable %></h1>
 
 <% form_for(@phone) do |f| %>
   <%= f.error_messages %>
@@ -12,15 +20,13 @@
   </p>
   <p>
     <%= f.label :tipo %><br />
-    <%= select :phone, :phone_type, options_for_select(@phone.type_choices) %>
+    <%= f.select :phone_type, options_for_select(@phone.type_choices, @phone.phone_type) %>
   </p>
   <p>
     <%= f.label :operadora %><br />
-    <%= select :phone, :company, options_for_select(@phone.company_choices) %>
+    <%= f.select :company, options_for_select(@phone.company_choices, @phone.company) %>
   </p>
   <p>
     <%= f.submit 'Atualizar' %>
   </p>
 <% end %>
-
-<%= link_to 'Cancelar', @callable %>

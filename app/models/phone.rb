@@ -5,7 +5,7 @@ class Phone < ActiveRecord::Base
   belongs_to :callable, :polymorphic => true
   
   # Atributos acessíveis através de 'mass-assignment'
-  attr_accessible :number, :company, :phone_type
+  attr_accessible :number, :company, :phone_type, :description
 
   # Atributos obrigatórios
   validates_presence_of :number

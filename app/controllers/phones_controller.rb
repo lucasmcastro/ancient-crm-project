@@ -35,6 +35,7 @@ class PhonesController < ApplicationController
   # GET /phones/1/edit
   def edit
     @phone = Phone.find(params[:id])
+    @callable = @phone.callable 
   end
 
   # POST /phones
@@ -60,11 +61,12 @@ class PhonesController < ApplicationController
   # PUT /phones/1.xml
   def update
     @phone = Phone.find(params[:id])
+    @callable = @phone.callable
 
     respond_to do |format|
       if @phone.update_attributes(params[:phone])
         flash[:notice] = 'Telefone atualizado com sucesso.'
-        format.html { redirect_to(@phone.callable) }
+        format.html { redirect_to(@callable) }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
