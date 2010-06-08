@@ -8,6 +8,7 @@
 <% end %>
 <% content_for :shortcuts do %>
   <ul>
+  	<li><%= link_to 'Adicionar Participante', new_interaction_stakeholder_path(@interaction) %></li>
   	<li><%= link_to 'Alterar Interação', edit_interaction_path(@interaction) %></li>
 	<li><%= link_to 'Remover Interação', @interaction, :confirm => 'Are you sure?', :method => :delete %></li>
 	<li><%= link_to_function("Atualizar Interação", "$('add_note').show()") %></li>	
@@ -20,7 +21,12 @@
 <p>Tipo: <strong><%=h @interaction.type %></strong></p>
 <p>Assunto: <strong><%=h @interaction.subject %></strong></p>
 <p>Objetivos: <%= @interaction.content.to_html %></p>
-
+<p>Participantes:</p>
+<% for stakeholder in @interaction.stakeholders do %>
+<ul>
+	<li><%= stakeholder %> (<%= link_to 'remover', stakeholder_path(stakeholder), :method => :delete, :confirm => 'Tem certeza?' %>)</li>
+</ul>
+<% end %>
 <br />
 
 <h2>Atualizações e Comentários</h2>

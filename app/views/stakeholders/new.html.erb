@@ -1,0 +1,17 @@
+<% content_for :back do %>
+<ul><li><%= link_to 'voltar', @interaction %></li></ul>
+<% end %>
+
+<h2>Novo participante</h2>
+
+<% form_for [@interaction, @stakeholder] do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :participante %><br />
+	<%= f.collection_select(:person_id, Person.all, :id, :forename, options ={:prompt => "------"}, :class =>"interaction") %>
+  </p>
+  <p>
+    <%= f.submit 'Adicionar' %>
+  </p>
+<% end %>

@@ -8,6 +8,7 @@ class Interaction < ActiveRecord::Base
   belongs_to :opportunity
 
   has_many :notes, :as => :commentable, :order => 'created_at DESC'
+  has_many :stakeholders
   
   # Atributos acessíveis para 'mass-assignment'
   # Nota:
@@ -35,11 +36,18 @@ class Interaction < ActiveRecord::Base
   validates_format_of :scheduled_time, :with => time_regexp, :message => "utiliza formado hh:mm", :unless => :scheduled_time_is_blank?
 
   # Definições
+  def has_stakeholder?(person_id)
+    for st in self.stakeholders
+      return true if st.person_id == person_id
+    end
+    return false
+  end
+  
   def scheduled_time_is_blank?
     self.scheduled_time.blank?
   end
   
   def to_param
     "#{self.id}-#{self.subject.gsub(/[^a-z0-9]+/i, '-')}-em-#{self.opportunity.product.to_s.gsub(/[^a-z0-9]+/i, '-')}-para-#{self.opportunity.account.name.gsub(/[^a-z0-9]+/i, '-')}"
-  end    
+  end
 end

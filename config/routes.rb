@@ -23,6 +23,7 @@ ActionController::Routing::Routes.draw do |map|
     accounts.resources :phones, :except => ['index', 'show']
     accounts.resources :opportunities do |opportunities|
       opportunities.resources :interactions do |interactions|
+        interactions.resources :stakeholders, :only => ['new','create','destroy']
         interactions.resources  :notes
       end
       opportunities.resources :issues do |issues|

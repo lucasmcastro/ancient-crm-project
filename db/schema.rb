@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100322233444) do
+ActiveRecord::Schema.define(:version => 20100608141631) do
 
   create_table "accounts", :force => true do |t|
     t.integer  "manager_id"
@@ -183,6 +183,13 @@ ActiveRecord::Schema.define(:version => 20100322233444) do
 
   add_index "roles_users", ["role_id"], :name => "index_roles_users_on_role_id"
   add_index "roles_users", ["user_id"], :name => "index_roles_users_on_user_id"
+
+  create_table "stakeholders", :force => true do |t|
+    t.integer  "person_id"
+    t.integer  "interaction_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", :force => true do |t|
     t.string   "login",                     :limit => 40
