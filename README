@@ -1,12 +1,12 @@
 == Introdução
 
-Atualizado em: 22-03-2010 por Lucas Castro
+Atualizado em: 07-06-2010 por Lucas Castro
 Versão: pré Alfa
 
-Tracker: http://veezor.lighthouseapp.com/projects/35342-veezor_crm/overview
-Github: http://github.com/lucasmcastro/Veezor-CRM
+Tracker: http://lucasmcastro.lighthouseapp.com/projects/35342-luke_crm/overview
+Github: http://github.com/lucasmcastro/Luke-CRM
 
-para mais informações: lucas.castro at linconet.com.br
+para mais informações: lucasmcastro at gmail.com
 
 
 == CRM integrado com Issue Tracker
@@ -18,13 +18,13 @@ CRM integrado com Issue Tracker vai permitir que o Suporte ganhe muito mais impo
 
 == Instalação
 
-Esse software está sendo feito com propósito único e específico de atender necessidades de curto prazo da Veezor.
+Esse software está sendo feito com propósito único e específico de atender necessidades de uma pequena empresa.
 Em outras versões futuras pretendemos abordar questões mais genéricas.
 
 Para instalar:
 
-1. git clone http://github.com/lucasmcastro/Veezor-CRM.git
-2. cd Veezor-CRM
+1. git clone git://github.com/lucasmcastro/Luke-CRM.git
+2. cd Luke-CRM
 3. rake gems:install
 4. rake db:migrate
 5. rake db:seed
@@ -32,9 +32,9 @@ Para instalar:
 
 == Web Servers
 
-Não foi reportada nenhuma incompatibilidade com relação a webservers.
+Não foi reportada nenhuma incompatibilidade com relação a servidores web.
 
 == Problemas Conhecidos
 
 Existem vários problemas com o software atualmente que encontra-se em versão pré Alfa.
-Para reportar um problema, acesse o Tracker (http://veezor.lighthouseapp.com/projects/35342-veezor_crm/tickets/new)
+Para reportar um problema, acesse o Tracker http://lucasmcastro.lighthouseapp.com/projects/35342-luke_crm/overview

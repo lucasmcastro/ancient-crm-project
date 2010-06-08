@@ -60,15 +60,6 @@ ActiveRecord::Schema.define(:version => 20100322233444) do
     t.datetime "updated_at"
   end
 
-  create_table "information", :force => true do |t|
-    t.integer  "informable_id"
-    t.string   "informable_type"
-    t.integer  "information_category_id"
-    t.string   "content"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "information_categories", :force => true do |t|
     t.string   "name"
     t.string   "category_type"
