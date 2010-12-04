@@ -1,6 +1,6 @@
 == Introdução
 
-Atualizado em: 07-06-2010 por Lucas Castro
+Atualizado em: 04-12-2010 por Lucas Castro
 Versão: pré Alfa
 
 Tracker: http://lucasmcastro.lighthouseapp.com/projects/35342-luke_crm/overview
@@ -8,6 +8,13 @@ Github: http://github.com/lucasmcastro/Luke-CRM
 
 para mais informações: lucasmcastro at gmail.com
 
+== Status do Desenvolvimento
+
+Atualmente estou portando a aplicação para Rails 3. Para isso, seguirei os seguintes passos:
+1. Estudar novas funcionalidades do Rails 3.
+2. Atualizar a documentação dos requisitos da aplicação (Versão Beta)
+3. Criar uma nova aplicação zerada no Rails 3.
+4. Implementar todos os requisitos definidos para a versão beta nessa nova aplicação.
 
 == CRM integrado com Issue Tracker
 
@@ -22,6 +29,8 @@ Esse software está sendo feito com propósito único e específico de atender n
 Em outras versões futuras pretendemos abordar questões mais genéricas.
 
 Para instalar:
+
+(rails versão 2.3)
 
 1. git clone git://github.com/lucasmcastro/Luke-CRM.git
 2. cd Luke-CRM
